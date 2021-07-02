@@ -30,6 +30,7 @@ typedef struct BroadcastResp
 class socket_test{
 public:
     socket_test();
+    ~socket_test();
     void find_deivces();
     QMap<QString, QString> get_devices() const {return m_devices;}
 private:

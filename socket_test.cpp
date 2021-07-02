@@ -1,11 +1,15 @@
 #include "socket_test.h"
-#include<WinSock2.h>
+#include <WinSock2.h>
 #pragma comment(lib,"ws2_32.lib")
 
 #define SX_CMD_SEARCH_REQ 0x1000
 
 modu::socket_test::socket_test(){
+    m_udp_socket = new QUdpSocket();
+}
 
+modu::socket_test::~socket_test(){
+    m_udp_socket->close();
 }
 
 void modu::socket_test::find_deivces(){
@@ -16,9 +20,11 @@ void modu::socket_test::find_deivces(){
     req.length = htonl(sizeof (modu::BroadcastReq));
     req.id = qrand();
     memset(req.rev,0,32);
-    m_udp_socket = new QUdpSocket();
+
+//    m_udp_socket = new QUdpSocket();
     m_udp_socket->bind(15120, QUdpSocket::ShareAddress);
     m_udp_socket->writeDatagram(reinterpret_cast<char*>(&req), sizeof(modu::BroadcastReq), QHostAddress::Broadcast,15120);
+
     while(m_udp_socket->hasPendingDatagrams()){
         datagram.resize(m_udp_socket->pendingDatagramSize());
         m_udp_socket->readDatagram(datagram.data(),datagram.size());
@@ -47,5 +53,4 @@ void modu::socket_test::find_deivces(){
         }
 
     }
-    m_udp_socket->close();
 }
