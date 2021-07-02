@@ -11,15 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
         refresh_list();
     });
     connect(ui->list,&QListWidget::itemClicked,this,[=](){
-        device_detail(0);
+        device_detail();
     });
 }
 
-void MainWindow::device_detail(int index){
-    int currenRow = ui->list->currentRow();
-    qDebug()<<currenRow;
-    QListWidgetItem *item = ui->list->;
-    qDebug()<<item->data(currenRow);
+void MainWindow::device_detail(){
+    QListWidgetItem *item = ui->list->currentItem();
+    qDebug()<<"Selected device Ipv4:"<<item->text();
+//    m_devices[item->text()];
 }
 
 void MainWindow::refresh_list(){
