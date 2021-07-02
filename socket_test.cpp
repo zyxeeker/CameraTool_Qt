@@ -13,22 +13,22 @@ modu::socket_test::~socket_test(){
 }
 
 void modu::socket_test::find_deivces(){
-    modu::BroadcastReq req;
+    Dev::BroadcastReq req;
     QByteArray datagram;
 
     req.cmd = htonl(SX_CMD_SEARCH_REQ);
-    req.length = htonl(sizeof (modu::BroadcastReq));
+    req.length = htonl(sizeof (Dev::BroadcastReq));
     req.id = qrand();
     memset(req.rev,0,32);
 
 //    m_udp_socket = new QUdpSocket();
     m_udp_socket->bind(15120, QUdpSocket::ShareAddress);
-    m_udp_socket->writeDatagram(reinterpret_cast<char*>(&req), sizeof(modu::BroadcastReq), QHostAddress::Broadcast,15120);
+    m_udp_socket->writeDatagram(reinterpret_cast<char*>(&req), sizeof(Dev::BroadcastReq), QHostAddress::Broadcast,15120);
 
     while(m_udp_socket->hasPendingDatagrams()){
         datagram.resize(m_udp_socket->pendingDatagramSize());
         m_udp_socket->readDatagram(datagram.data(),datagram.size());
-        modu::BroadcastResp* resp = reinterpret_cast<modu::BroadcastResp*>(datagram.data());
+        Dev::BroadcastResp* resp = reinterpret_cast<Dev::BroadcastResp*>(datagram.data());
         uint8_t* ptr_d = reinterpret_cast<uint8_t*>(resp);
         qDebug()<<"CameraDetectService: received broadcast,"<<
                   "flag:"<<resp->flag<<

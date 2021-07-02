@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "socket_test.h"
+#include "param.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,6 @@ public:
 private:
     Ui::MainWindow *ui;
     modu::socket_test m_socket;
-    QMap<QString,modu::Device> m_devices;
+    QMap<QString,Dev::Device> m_devices;
 };
 #endif // MAINWINDOW_H
