@@ -4,9 +4,11 @@
 
 int main(int argc, char *argv[])
 {
-    modu::socket_test test1;
-    test1.find_deivces();
-    test1.get_devices();
+//    while(true){
+//        modu::socket_test test1;
+//        test1.find_deivces();
+//        test1.get_devices();
+//    }
 
     QApplication a(argc, argv);
     MainWindow w;

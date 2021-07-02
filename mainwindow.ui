@@ -119,9 +119,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_15">
+             <widget class="QLabel" name="device_ip">
               <property name="text">
-               <string>192.163.111.111</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -137,9 +137,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_21">
+             <widget class="QLabel" name="device_mac">
               <property name="text">
-               <string>00:53:58:49:cd:ca</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -155,9 +155,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_18">
+             <widget class="QLabel" name="device_gateway">
               <property name="text">
-               <string>192.168.111.111</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -173,9 +173,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_17">
+             <widget class="QLabel" name="mask">
               <property name="text">
-               <string>24</string>
+               <string/>
               </property>
              </widget>
             </item>
