@@ -43,11 +43,17 @@ void modu::socket_test::find_deivces(){
             qDebug()<<ethes;
             for(QString item : ethes){
                 if(item.size()>0){
+//                    m_device = new modu::Device;
                     QStringList info =  item.split("#");
-                    qDebug()<<info;
-                    QString mac = info[1];
                     QString ip = info[2];
-                    m_devices[ip] = mac;
+                    qDebug()<<info;
+                    m_device.mac = info[1];
+                    m_device.ip = info[2];
+
+                    m_device.gateway = info[3];
+                    m_device.mask = info[4];
+                    m_device_list[ip] = m_device;
+
                 }
             }
         }

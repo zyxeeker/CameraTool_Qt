@@ -27,15 +27,23 @@ typedef struct BroadcastResp
     char ipv4[256];
 }BroadcastResp;
 
+typedef struct Device{
+    QString ip;
+    QString mac;
+    QString gateway;
+    QString mask;
+} Device;
+
 class socket_test{
 public:
     socket_test();
     ~socket_test();
     void find_deivces();
-    QMap<QString, QString> get_devices() const {return m_devices;}
+    QMap<QString, modu::Device> get_devices() const {return m_device_list;}
 private:
     QUdpSocket *m_udp_socket = nullptr;
-    QMap<QString, QString> m_devices;
+    QMap<QString, modu::Device> m_device_list;
+    modu::Device m_device;
 
 };
 }

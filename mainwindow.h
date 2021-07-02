@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -20,7 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    modu::socket_test *m_socket;
-    QMap<QString,QString> m_devices;
+    modu::socket_test m_socket;
+    QMap<QString,modu::Device> m_devices;
 };
 #endif // MAINWINDOW_H
