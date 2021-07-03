@@ -9,19 +9,23 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void refresh_list();
-    void device_detail();
+
+    void RefreshDeviceList();
+
+    void DeviceDetail();
+
+    void GetLocalDetail();
+
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
     modu::socket_test m_socket;
-    QMap<QString,Dev::Device> m_devices;
+    QMap<QString, Dev::Device> m_devices;
 };
 #endif // MAINWINDOW_H
