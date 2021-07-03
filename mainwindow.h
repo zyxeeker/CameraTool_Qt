@@ -5,6 +5,7 @@
 #include <QNetworkAddressEntry>
 #include "socket_test.h"
 #include "param.h"
+#include "logger.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

@@ -33,7 +33,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 void MainWindow::DeviceDetail() {
     QListWidgetItem *item = ui->list->currentItem();
-    qDebug() << "Selected device Ipv4:" << item->text();
+
+    LOG::logger(LOG::LogLevel::INFO, "Selected device Ipv4:" + item->text().toStdString());
 
     m_cur_device.ip = m_devices[item->text()].ip;
     m_cur_device.mask = m_devices[item->text()].mask;
@@ -47,17 +48,21 @@ void MainWindow::DeviceDetail() {
 }
 
 void MainWindow::RefreshDeviceList() {
-    qDebug() << "Clean deivce`s list...";
+    LOG::logger(LOG::LogLevel::INFO, "Clean deivce`s list...");
+
     ui->list->clear();
-    qDebug() << "Start Refreshing...";
+    LOG::logger(LOG::LogLevel::INFO, "Start Refreshing...");
+
     m_socket.find_deivces();
     m_devices = m_socket.get_devices();
     if (m_devices.size() == 0)
-        qDebug() << "Not found any device.";
+        LOG::logger(LOG::LogLevel::WARN, "Not found any device.");
+
     for (auto iter : m_devices) {
         ui->list->addItem(iter.ip);
     }
-    qDebug() << "Refreshing list has finished!";
+
+    LOG::logger(LOG::LogLevel::INFO, "Refreshing list has finished!");
 }
 
 void MainWindow::GetLocalDetail() {
@@ -68,10 +73,8 @@ void MainWindow::GetLocalDetail() {
     QHostInfo info = QHostInfo::fromName(local);
             foreach(QHostAddress address, info.addresses()) {
             //只取ipv4协议的地址
-            if (address.protocol() == QAbstractSocket::IPv4Protocol) {
+            if (address.protocol() == QAbstractSocket::IPv4Protocol)
                 ipv4_tmp = address;
-                qDebug() << address.toString();
-            }
         }
     gateway = ipv4_tmp.toString();
     for (int i = 0; i < gateway.size(); ++i) {
@@ -99,18 +102,11 @@ void MainWindow::GetLocalDetail() {
                     ui->local_mask->setText(m_localhost.mask);
                     ui->local_gateway->setText(m_localhost.gateway);
 
-                    qDebug() << "******Local Device Detail******";
-                    // IP地址
-                    qDebug() << "IP Address:" << entry.ip().toString();
-                    // 子网掩码
-                    qDebug() << "Netmask:" << entry.netmask().toString();
-                    // 广播地址
-                    qDebug() << "Broadcast:" << entry.broadcast().toString();
-                    // 网关
-                    qDebug() << "Gateway:" << gateway;
-                    // 前缀长度
-                    qDebug() << "Prefix Length:" << entry.prefixLength();
-                    qDebug() << "*******************************";
+                    LOG::logger(LOG::LogLevel::INFO, "Local Device Detail: IP:" + entry.ip().toString() +
+                                                     " Netmask:" + entry.netmask().toString() +
+                                                     " Broadcast:" + entry.broadcast().toString() +
+                                                     " Gateway:" + gateway +
+                                                     " Prefix Length:" + entry.prefixLength(), 0);
                 }
         }
 }

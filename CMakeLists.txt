@@ -37,7 +37,7 @@ set(PROJECT_SOURCES
         socket_test.h
         socket_test.cpp
         param.h
-)
+        logger.cpp logger.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(test
