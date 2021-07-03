@@ -121,14 +121,18 @@ void MainWindow::SetLocal() {
         ui->statusbar->showMessage("参数为空, 请键入参数！");
     else if (!rx.exactMatch(ip_input) || !rx.exactMatch(gateway_input) || !rx.exactMatch(mask_input))
         ui->statusbar->showMessage("非法参数!");
-    QProcess cmd(this);
-    QString command =
-            "netsh interface ipv4 set address " + m_localhost.name + " static " + ip_input + " " + mask_input + " " +
-            gateway_input;
-    LOG::logger(LOG::LogLevel::INFO, command, 0);
-    cmd.start(command);
-    cmd.waitForFinished();
-    ui->statusbar->showMessage("成功!");
+    else {
+        QProcess cmd(this);
+        QString command =
+                "netsh interface ipv4 set address " + m_localhost.name + " static " + ip_input + " " + mask_input +
+                " " +
+                gateway_input;
+        LOG::logger(LOG::LogLevel::INFO, command, 0);
+        cmd.start(command);
+        cmd.waitForFinished();
+        ui->statusbar->showMessage("成功!");
+    }
+
 }
 
 MainWindow::~MainWindow() {
