@@ -21,14 +21,22 @@ typedef struct BroadcastResp
     uint32_t id = 0;
     char sn[16];
     char ipv4[256];
-}BroadcastResp;
+} BroadcastResp;
 
-typedef struct Device{
-    QString ip;
-    QString mac;
-    QString gateway;
-    QString mask;
-} Device;
+    typedef struct Device {
+        QString ip;
+        QString mac;
+        QString gateway;
+        QString mask;
+    } Device;
+
+    typedef struct Localhost {
+        QString name;
+        QString ip;
+        QString mac;
+        QString gateway;
+        QString mask;
+    } Localhost;
 
 }
 

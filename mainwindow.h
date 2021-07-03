@@ -31,9 +31,7 @@ private:
     modu::socket_test m_socket;
     QMap<QString, Dev::Device> m_devices;
 
-    QString m_ip_tmp;
-    QString m_gateway_tmp;
-    QString m_mask_tmp;
-    QString m_net_name;
+    Dev::Localhost m_localhost;
+    Dev::Device m_cur_device;
 };
 #endif // MAINWINDOW_H

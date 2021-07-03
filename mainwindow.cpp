@@ -25,21 +25,25 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     });
     connect(ui->direct, &QRadioButton::clicked, this, [=]() {
         QMessageBox::information(NULL, "注意", "请直连设备！", QMessageBox::Ok, QMessageBox::Ok);
-        ui->ip_input->setText(m_ip_tmp);
-        ui->gateway_input->setText(m_gateway_tmp);
+        ui->ip_input->setText(m_cur_device.ip);
+        ui->gateway_input->setText(m_cur_device.gateway);
+        ui->mask_input->setText(m_cur_device.mask);
     });
 }
 
 void MainWindow::DeviceDetail() {
     QListWidgetItem *item = ui->list->currentItem();
     qDebug() << "Selected device Ipv4:" << item->text();
-    m_ip_tmp = m_devices[item->text()].ip;
-    m_gateway_tmp = m_devices[item->text()].gateway;
 
-    ui->device_ip->setText(m_ip_tmp);
-    ui->device_mac->setText(m_devices[item->text()].mac);
-    ui->device_gateway->setText(m_gateway_tmp);
-    ui->mask->setText(m_devices[item->text()].mask);
+    m_cur_device.ip = m_devices[item->text()].ip;
+    m_cur_device.mask = m_devices[item->text()].mask;
+    m_cur_device.gateway = m_devices[item->text()].gateway;
+    m_cur_device.mac = m_devices[item->text()].mac;
+
+    ui->device_ip->setText(m_cur_device.ip);
+    ui->device_mac->setText(m_cur_device.mac);
+    ui->device_gateway->setText(m_cur_device.gateway);
+    ui->mask->setText(m_cur_device.mask);
 }
 
 void MainWindow::RefreshDeviceList() {
@@ -62,7 +66,6 @@ void MainWindow::GetLocalDetail() {
     QString gateway;
     QString local = QHostInfo::localHostName();
     QHostInfo info = QHostInfo::fromName(local);
-
             foreach(QHostAddress address, info.addresses()) {
             //只取ipv4协议的地址
             if (address.protocol() == QAbstractSocket::IPv4Protocol) {
@@ -81,18 +84,21 @@ void MainWindow::GetLocalDetail() {
     QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
             foreach (QNetworkInterface netInterface, list) {
             QList<QNetworkAddressEntry> entryList = netInterface.addressEntries();
-
-            qDebug() << m_net_name;
             // 遍历每一个IP地址
                     foreach(QNetworkAddressEntry entry, entryList) {
                     if (ipv4_tmp.toString() != entry.ip().toString()) continue;
 
-                    m_net_name = netInterface.humanReadableName();
+                    m_localhost.name = netInterface.humanReadableName();
+                    m_localhost.ip = entry.ip().toString();
+                    m_localhost.mask = entry.netmask().toString();
+                    m_localhost.gateway = gateway;
+                    m_localhost.mac = netInterface.hardwareAddress();
 
-                    ui->local_ip->setText(entry.ip().toString());
-                    ui->local_mac->setText(netInterface.hardwareAddress());
-                    ui->local_mask->setText(entry.netmask().toString());
-                    ui->local_gateway->setText(gateway);
+                    ui->local_ip->setText(m_localhost.ip);
+                    ui->local_mac->setText(m_localhost.mac);
+                    ui->local_mask->setText(m_localhost.mask);
+                    ui->local_gateway->setText(m_localhost.gateway);
+
                     qDebug() << "******Local Device Detail******";
                     // IP地址
                     qDebug() << "IP Address:" << entry.ip().toString();
@@ -111,22 +117,22 @@ void MainWindow::GetLocalDetail() {
 
 void MainWindow::SetLocal() {
     QRegExp rx("((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)");
-    QString ip_tmp = ui->ip_input->text();
-    QString gateway_tmp = ui->gateway_input->text();
-    QString mask_tmp = ui->mask_input->text();
+    QString ip_input = ui->ip_input->text();
+    QString gateway_input = ui->gateway_input->text();
+    QString mask_input = ui->mask_input->text();
 
-    if (ip_tmp.isEmpty() || mask_tmp.isEmpty())
+    if (ip_input.isEmpty() || gateway_input.isEmpty() || mask_input.isEmpty())
         ui->statusbar->showMessage("参数为空, 请键入参数！");
-    else if (!rx.exactMatch(ip_tmp))
+    else if (!rx.exactMatch(ip_input) || !rx.exactMatch(gateway_input) || !rx.exactMatch(mask_input))
         ui->statusbar->showMessage("非法参数!");
-    qDebug() << m_net_name;
     QProcess cmd(this);
     QString command =
-            "netsh interface ipv4 set address " + m_net_name + " static " + ip_tmp + " " + mask_tmp + " " + gateway_tmp;
+            "netsh interface ipv4 set address " + m_localhost.name + " static " + ip_input + " " + mask_input + " " +
+            gateway_input;
     qDebug() << command;
     cmd.start(command);
-    ui->statusbar->showMessage("waiting...");
     cmd.waitForFinished();
+    ui->statusbar->showMessage("成功!");
 }
 
 MainWindow::~MainWindow() {
