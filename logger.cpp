@@ -24,11 +24,11 @@ std::string LOG::LogLevel::toString(LogLevel::LOG_LEVEL level) {
 }
 
 LOG::logger::logger(LOG::LogLevel::LOG_LEVEL level, std::string content) {
-    qDebug() << QString::fromStdString("[" + m_level_trans.toString(level) + "]" + content);
+    qDebug() << QString::fromStdString("[" + m_level_trans.toString(level) + "]: " + content);
 }
 
 LOG::logger::logger(LOG::LogLevel::LOG_LEVEL level, QString content, bool mark) {
-    qDebug() << QString::fromStdString("[" + m_level_trans.toString(level) + "]") << content;
+    qDebug() << QString::fromStdString("[" + m_level_trans.toString(level) + "]: ") + content;
 }
 
 
