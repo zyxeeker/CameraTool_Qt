@@ -36,6 +36,7 @@ set(PROJECT_SOURCES
         mainwindow.ui
         socket_test.h
         socket_test.cpp
+        param.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
