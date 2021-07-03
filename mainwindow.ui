@@ -450,7 +450,11 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="ip_input"/>
+                <widget class="QLineEdit" name="ip_input">
+                    <property name="maxLength">
+                        <number>15</number>
+                    </property>
+                </widget>
             </item>
            </layout>
           </item>
@@ -480,11 +484,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="gateway_input">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-             </widget>
+                <widget class="QLineEdit" name="gateway_input"/>
             </item>
            </layout>
           </item>
@@ -513,9 +513,13 @@
               </property>
              </spacer>
             </item>
-            <item>
-             <widget class="QLineEdit" name="mask_input"/>
-            </item>
+               <item>
+                   <widget class="QLineEdit" name="mask_input">
+                       <property name="maxLength">
+                           <number>15</number>
+                       </property>
+                   </widget>
+               </item>
            </layout>
           </item>
           <item>
