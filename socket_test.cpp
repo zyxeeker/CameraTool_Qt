@@ -1,4 +1,5 @@
 #include "socket_test.h"
+#include "logger.h"
 #include <WinSock2.h>
 #pragma comment(lib,"ws2_32.lib")
 
@@ -21,35 +22,30 @@ void modu::socket_test::find_deivces(){
     req.id = qrand();
     memset(req.rev,0,32);
 
-//    m_udp_socket = new QUdpSocket();
     m_udp_socket->bind(15120, QUdpSocket::ShareAddress);
     m_udp_socket->writeDatagram(reinterpret_cast<char*>(&req), sizeof(Dev::BroadcastReq), QHostAddress::Broadcast,15120);
 
-    while(m_udp_socket->hasPendingDatagrams()){
+    while(m_udp_socket->hasPendingDatagrams()) {
         datagram.resize(m_udp_socket->pendingDatagramSize());
-        m_udp_socket->readDatagram(datagram.data(),datagram.size());
-        Dev::BroadcastResp* resp = reinterpret_cast<Dev::BroadcastResp*>(datagram.data());
-        uint8_t* ptr_d = reinterpret_cast<uint8_t*>(resp);
-        qDebug()<<"CameraDetectService: received broadcast,"<<
-                  "flag:"<<resp->flag<<
-                  "cmd:"<<ntohl(resp->cmd)<<
-                  "length:"<<ntohl(resp->length)<<
-                  "ipv4:"<<resp->ipv4;
+        m_udp_socket->readDatagram(datagram.data(), datagram.size());
+        Dev::BroadcastResp *resp = reinterpret_cast<Dev::BroadcastResp *>(datagram.data());
+        uint8_t *ptr_d = reinterpret_cast<uint8_t *>(resp);
+        LOG::logger(LOG::LogLevel::INFO, "CameraDetectService: received broadcast,"
+                                         " flag:" + QString(resp->flag) +
+                                         " cmd:" + ntohl(resp->cmd) +
+                                         " length:" + ntohl(resp->length) +
+                                         " ipv4:" + resp->ipv4, 0);
 
         QString ipv4 = resp->ipv4;
         QStringList ethes = ipv4.split(";");
 
-        if(ethes.size()!=0){
-            qDebug()<<ethes;
-            for(QString item : ethes){
-                if(item.size()>0){
-//                    m_device = new modu::Device;
-                    QStringList info =  item.split("#");
+        if (ethes.size() != 0) {
+            for (QString item : ethes) {
+                if (item.size() > 0) {
+                    QStringList info = item.split("#");
                     QString ip = info[2];
-                    qDebug()<<info;
                     m_device.mac = info[1];
                     m_device.ip = info[2];
-
                     m_device.gateway = info[3];
                     m_device.mask = info[4];
                     m_device_list[ip] = m_device;

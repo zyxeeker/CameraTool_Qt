@@ -125,7 +125,7 @@ void MainWindow::SetLocal() {
     QString command =
             "netsh interface ipv4 set address " + m_localhost.name + " static " + ip_input + " " + mask_input + " " +
             gateway_input;
-    qDebug() << command;
+    LOG::logger(LOG::LogLevel::INFO, command, 0);
     cmd.start(command);
     cmd.waitForFinished();
     ui->statusbar->showMessage("成功!");
