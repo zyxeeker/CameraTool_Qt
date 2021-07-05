@@ -33,7 +33,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    CameraDetect m_socket;
+    CameraDetect m_detectService;
     QMap<QString, Dev::NetDevice> m_netDevices;
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
 

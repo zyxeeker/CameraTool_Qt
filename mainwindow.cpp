@@ -69,8 +69,8 @@ void MainWindow::RefreshDeviceList() {
     ui->list->clear();
     LOG::logger(LOG::LogLevel::INFO, "Start Refreshing...");
 
-    m_socket.find_net_devices();
-    m_netDevices = m_socket.getNetDevices();
+    m_detectService.find_net_devices();
+    m_netDevices = m_detectService.getNetDevices();
     if (m_netDevices.size() == 0)
         LOG::logger(LOG::LogLevel::WARN, "Not found any device.");
 
@@ -151,8 +151,8 @@ void MainWindow::SetLocal() {
 
 void MainWindow::RefreshUVCDeviceList() {
     ui->uvc_list->clear();
-    m_socket.find_uvc_devices();
-    m_uvcDevices = m_socket.getUVCDevices();
+    m_detectService.find_uvc_devices();
+    m_uvcDevices = m_detectService.getUVCDevices();
 
     for (auto item : m_uvcDevices)
         ui->uvc_list->addItem(item.des);

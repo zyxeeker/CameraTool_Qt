@@ -11,12 +11,12 @@ CameraDetect::CameraDetect() {
 }
 
 CameraDetect::~CameraDetect() {
-    m_udp_socket->close();
+    m_udpSocket->close();
 }
 
 void CameraDetect::find_net_devices() {
-    if (m_udp_socket) m_udp_socket->close();
-    m_udp_socket = new QUdpSocket();
+    if (m_udpSocket) m_udpSocket->close();
+    m_udpSocket = new QUdpSocket();
 
     Dev::BroadcastReq req;
     QByteArray datagram;
@@ -26,13 +26,14 @@ void CameraDetect::find_net_devices() {
     req.id = qrand();
     memset(req.rev, 0, 32);
 
-    m_udp_socket->bind(15120, QUdpSocket::ShareAddress);
+    m_udpSocket->bind(15120, QUdpSocket::ShareAddress);
 
-    m_udp_socket->writeDatagram(reinterpret_cast<char*>(&req), sizeof(Dev::BroadcastReq), QHostAddress::Broadcast,15120);
+    m_udpSocket->writeDatagram(reinterpret_cast<char *>(&req), sizeof(Dev::BroadcastReq), QHostAddress::Broadcast,
+                               15120);
 
-    while(m_udp_socket->hasPendingDatagrams()) {
-        datagram.resize(m_udp_socket->pendingDatagramSize());
-        m_udp_socket->readDatagram(datagram.data(), datagram.size());
+    while (m_udpSocket->hasPendingDatagrams()) {
+        datagram.resize(m_udpSocket->pendingDatagramSize());
+        m_udpSocket->readDatagram(datagram.data(), datagram.size());
         Dev::BroadcastResp *resp = reinterpret_cast<Dev::BroadcastResp *>(datagram.data());
         uint8_t *ptr_d = reinterpret_cast<uint8_t *>(resp);
         LOG::logger(LOG::LogLevel::INFO, "CameraDetectService: received broadcast,"

@@ -22,7 +22,7 @@ public:
     QMap<QString, Dev::UVCDevice> getUVCDevices() const { return m_uvcDeviceList; }
 
 private:
-    QUdpSocket *m_udp_socket = nullptr;
+    QUdpSocket *m_udpSocket = nullptr;
     QMap<QString, Dev::NetDevice> m_netDeviceList;
     Dev::NetDevice m_netDevice;
 
