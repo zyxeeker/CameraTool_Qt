@@ -11,6 +11,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(OpenCV_DIR "opencv341")
+
+#set(OpenCV_DIR ${PROJECT_SOURCE_DIR}/opencv341/x64/vc16/lib)
+#set(OpenCV_INCLUDES ${PROJECT_SOURCE_DIR}/opencv341/include)
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package( ...) calls below.
@@ -29,6 +33,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Multimedia REQUIRED)
+find_package(OpenCV REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -38,7 +43,7 @@ set(PROJECT_SOURCES
         service/camera_detect.h
         service/camera_detect.cpp
         param.h
-        logger/logger.cpp logger/logger.h)
+        logger/logger.cpp logger/logger.h service/camera_core.cpp service/camera_core.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(test
@@ -50,24 +55,26 @@ else()
         add_library(test SHARED
             ${PROJECT_SOURCES}
         )
-    else()
+    else ()
         add_executable(test
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
+                ${PROJECT_SOURCES}
+                )
+    endif ()
+endif ()
 
 target_link_libraries(test PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(test LINK_PUBLIC Qt${QT_VERSION_MAJOR}::Network)
 target_link_libraries(test LINK_PUBLIC Qt${QT_VERSION_MAJOR}::Multimedia)
+target_link_libraries(test LINK_PUBLIC ${OpenCV_LIBS})
+
 
 set_target_properties(test PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-)
+        MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        )
 
-if(QT_VERSION_MAJOR EQUAL 6)
+if (QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(test)
 endif()
 
