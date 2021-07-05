@@ -34,10 +34,10 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        socket_test.h
-        socket_test.cpp
+        net/socket_test.h
+        net/socket_test.cpp
         param.h
-        logger.cpp logger.h)
+        logger/logger.cpp logger/logger.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(test

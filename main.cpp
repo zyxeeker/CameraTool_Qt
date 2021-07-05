@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "socket_test.h"
+#include "net/socket_test.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

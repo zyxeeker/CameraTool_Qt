@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include <QNetworkAddressEntry>
-#include "socket_test.h"
+#include "net/socket_test.h"
 #include "param.h"
-#include "logger.h"
+#include "logger/logger.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
