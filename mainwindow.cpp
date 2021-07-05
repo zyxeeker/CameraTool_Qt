@@ -25,9 +25,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     });
     connect(ui->direct, &QRadioButton::clicked, this, [=]() {
         QMessageBox::information(NULL, "注意", "请直连设备！", QMessageBox::Ok, QMessageBox::Ok);
-        ui->ip_input->setText(m_cur_device.ip);
-        ui->gateway_input->setText(m_cur_device.gateway);
-        ui->mask_input->setText(m_cur_device.mask);
+        ui->ip_input->setText(m_curNetDevice.ip);
+        ui->gateway_input->setText(m_curNetDevice.gateway);
+        ui->mask_input->setText(m_curNetDevice.mask);
     });
 }
 
@@ -36,15 +36,15 @@ void MainWindow::DeviceDetail() {
 
     LOG::logger(LOG::LogLevel::INFO, "Selected device Ipv4:" + item->text().toStdString());
 
-    m_cur_device.ip = m_devices[item->text()].ip;
-    m_cur_device.mask = m_devices[item->text()].mask;
-    m_cur_device.gateway = m_devices[item->text()].gateway;
-    m_cur_device.mac = m_devices[item->text()].mac;
+    m_curNetDevice.ip = m_netDevices[item->text()].ip;
+    m_curNetDevice.mask = m_netDevices[item->text()].mask;
+    m_curNetDevice.gateway = m_netDevices[item->text()].gateway;
+    m_curNetDevice.mac = m_netDevices[item->text()].mac;
 
-    ui->device_ip->setText(m_cur_device.ip);
-    ui->device_mac->setText(m_cur_device.mac);
-    ui->device_gateway->setText(m_cur_device.gateway);
-    ui->mask->setText(m_cur_device.mask);
+    ui->device_ip->setText(m_curNetDevice.ip);
+    ui->device_mac->setText(m_curNetDevice.mac);
+    ui->device_gateway->setText(m_curNetDevice.gateway);
+    ui->mask->setText(m_curNetDevice.mask);
 }
 
 void MainWindow::RefreshDeviceList() {
@@ -53,12 +53,12 @@ void MainWindow::RefreshDeviceList() {
     ui->list->clear();
     LOG::logger(LOG::LogLevel::INFO, "Start Refreshing...");
 
-    m_socket.find_deivces();
-    m_devices = m_socket.get_devices();
-    if (m_devices.size() == 0)
+    m_socket.find_net_devices();
+    m_netDevices = m_socket.get_net_devices();
+    if (m_netDevices.size() == 0)
         LOG::logger(LOG::LogLevel::WARN, "Not found any device.");
 
-    for (auto iter : m_devices) {
+    for (auto iter : m_netDevices) {
         ui->list->addItem(iter.ip);
     }
 

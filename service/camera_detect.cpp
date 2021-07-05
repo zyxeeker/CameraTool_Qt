@@ -12,7 +12,7 @@ CameraDetect::~CameraDetect() {
     m_udp_socket->close();
 }
 
-void CameraDetect::find_deivces() {
+void CameraDetect::find_net_devices() {
     if (m_udp_socket) m_udp_socket->close();
     m_udp_socket = new QUdpSocket();
 
@@ -47,11 +47,11 @@ void CameraDetect::find_deivces() {
                 if (item.size() > 0) {
                     QStringList info = item.split("#");
                     QString ip = info[2];
-                    m_device.mac = info[1];
-                    m_device.ip = info[2];
-                    m_device.gateway = info[3];
-                    m_device.mask = info[4];
-                    m_device_list[ip] = m_device;
+                    m_netDevice.mac = info[1];
+                    m_netDevice.ip = info[2];
+                    m_netDevice.gateway = info[3];
+                    m_netDevice.mask = info[4];
+                    m_netDeviceList[ip] = m_netDevice;
 
                 }
             }

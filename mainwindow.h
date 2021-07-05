@@ -30,9 +30,9 @@ public:
 private:
     Ui::MainWindow *ui;
     CameraDetect m_socket;
-    QMap<QString, Dev::Device> m_devices;
+    QMap<QString, Dev::NetDevice> m_netDevices;
 
     Dev::Localhost m_localhost;
-    Dev::Device m_cur_device;
+    Dev::NetDevice m_curNetDevice;
 };
 #endif // MAINWINDOW_H

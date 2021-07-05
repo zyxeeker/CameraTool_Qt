@@ -12,20 +12,19 @@ namespace Dev {
         uint32_t length = 48;
         uint32_t cmd = 0x1000;
         uint32_t id = 0;
-    char rev[32];
-}BroadcastReq;
+        char rev[32];
+    } BroadcastReq;
 
-typedef struct BroadcastResp
-{
-    char flag[4] = {'s','e','e','v'};
-    uint32_t length = 288;
-    uint32_t cmd = SX_CMD_SEARCH_ACK;
-    uint32_t id = 0;
-    char sn[16];
-    char ipv4[256];
-} BroadcastResp;
+    typedef struct BroadcastResp {
+        char flag[4] = {'s', 'e', 'e', 'v'};
+        uint32_t length = 288;
+        uint32_t cmd = SX_CMD_SEARCH_ACK;
+        uint32_t id = 0;
+        char sn[16];
+        char ipv4[256];
+    } BroadcastResp;
 
-    typedef struct Device {
+    typedef struct NetDevice {
         QString ip;
         QString mac;
         QString gateway;
@@ -39,6 +38,10 @@ typedef struct BroadcastResp
         QString gateway;
         QString mask;
     } Localhost;
+
+    typedef struct UVCDevice {
+
+    } UVCDevice;
 
 }
 
