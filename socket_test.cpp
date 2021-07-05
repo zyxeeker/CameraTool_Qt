@@ -6,7 +6,6 @@
 #define SX_CMD_SEARCH_REQ 0x1000
 
 modu::socket_test::socket_test(){
-    m_udp_socket = new QUdpSocket();
 }
 
 modu::socket_test::~socket_test(){
@@ -14,15 +13,19 @@ modu::socket_test::~socket_test(){
 }
 
 void modu::socket_test::find_deivces(){
+    if (m_udp_socket) m_udp_socket->close();
+    m_udp_socket = new QUdpSocket();
+
     Dev::BroadcastReq req;
     QByteArray datagram;
 
     req.cmd = htonl(SX_CMD_SEARCH_REQ);
-    req.length = htonl(sizeof (Dev::BroadcastReq));
+    req.length = htonl(sizeof(Dev::BroadcastReq));
     req.id = qrand();
-    memset(req.rev,0,32);
+    memset(req.rev, 0, 32);
 
     m_udp_socket->bind(15120, QUdpSocket::ShareAddress);
+
     m_udp_socket->writeDatagram(reinterpret_cast<char*>(&req), sizeof(Dev::BroadcastReq), QHostAddress::Broadcast,15120);
 
     while(m_udp_socket->hasPendingDatagrams()) {
