@@ -34,8 +34,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        net/socket_test.h
-        net/socket_test.cpp
+        service/camera_detect.h
+        service/camera_detect.cpp
         param.h
         logger/logger.cpp logger/logger.h)
 

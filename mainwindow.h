@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QNetworkAddressEntry>
-#include "net/socket_test.h"
+#include "service/camera_detect.h"
 #include "param.h"
 #include "logger/logger.h"
 
@@ -29,7 +29,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    modu::socket_test m_socket;
+    CameraDetect m_socket;
     QMap<QString, Dev::Device> m_devices;
 
     Dev::Localhost m_localhost;

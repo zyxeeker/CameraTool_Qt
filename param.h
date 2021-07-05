@@ -1,15 +1,17 @@
 #ifndef PARAM_H
 #define PARAM_H
 
+#include <cstdint>
+#include <QString>
+
 #define SX_CMD_SEARCH_ACK 0x2000
 
 namespace Dev {
-typedef struct BroadcastReq
-{
-    char flag[4] = {'s','e','e','v'};
-    uint32_t length = 48;
-    uint32_t cmd = 0x1000;
-    uint32_t id = 0;
+    typedef struct BroadcastReq {
+        char flag[4] = {'s', 'e', 'e', 'v'};
+        uint32_t length = 48;
+        uint32_t cmd = 0x1000;
+        uint32_t id = 0;
     char rev[32];
 }BroadcastReq;
 

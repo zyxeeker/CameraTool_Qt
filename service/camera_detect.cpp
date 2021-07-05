@@ -1,18 +1,18 @@
-#include "socket_test.h"
+#include "camera_detect.h"
 #include "logger/logger.h"
 #include <WinSock2.h>
 #pragma comment(lib,"ws2_32.lib")
 
 #define SX_CMD_SEARCH_REQ 0x1000
 
-modu::socket_test::socket_test(){
+CameraDetect::CameraDetect() {
 }
 
-modu::socket_test::~socket_test(){
+CameraDetect::~CameraDetect() {
     m_udp_socket->close();
 }
 
-void modu::socket_test::find_deivces(){
+void CameraDetect::find_deivces() {
     if (m_udp_socket) m_udp_socket->close();
     m_udp_socket = new QUdpSocket();
 

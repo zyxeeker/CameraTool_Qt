@@ -30,7 +30,7 @@
              <item row="0" column="0">
                  <widget class="QTabWidget" name="tabWidget">
                      <property name="currentIndex">
-                         <number>0</number>
+                         <number>1</number>
                      </property>
                      <widget class="QWidget" name="udp">
                          <attribute name="title">
@@ -541,16 +541,54 @@
                              </item>
                          </layout>
                      </widget>
-      <widget class="QWidget" name="tcp">
-       <attribute name="title">
-        <string>TCP</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="uvc">
-       <attribute name="title">
-        <string>UVC</string>
-       </attribute>
-      </widget>
+                     <widget class="QWidget" name="uvc">
+                         <attribute name="title">
+                             <string>UVC</string>
+                         </attribute>
+                         <widget class="QLabel" name="label_7">
+                             <property name="geometry">
+                                 <rect>
+                                     <x>10</x>
+                                     <y>10</y>
+                                     <width>54</width>
+                                     <height>12</height>
+                                 </rect>
+                             </property>
+                             <property name="text">
+                                 <string>在线设备：</string>
+                             </property>
+                         </widget>
+                         <widget class="QListWidget" name="listWidget">
+                             <property name="geometry">
+                                 <rect>
+                                     <x>10</x>
+                                     <y>30</y>
+                                     <width>271</width>
+                                     <height>471</height>
+                                 </rect>
+                             </property>
+                             <item>
+                                 <property name="text">
+                                     <string>新建项目</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>新建项目</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>新建项目</string>
+                                 </property>
+                             </item>
+                             <item>
+                                 <property name="text">
+                                     <string>新建项目</string>
+                                 </property>
+                             </item>
+                         </widget>
+                     </widget>
      </widget>
     </item>
    </layout>
