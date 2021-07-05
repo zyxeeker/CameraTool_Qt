@@ -28,6 +28,7 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 find_package(Qt5Network REQUIRED)
+find_package(Qt5Multimedia REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -58,7 +59,7 @@ endif()
 
 target_link_libraries(test PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(test LINK_PUBLIC Qt${QT_VERSION_MAJOR}::Network)
-
+target_link_libraries(test LINK_PUBLIC Qt${QT_VERSION_MAJOR}::Multimedia)
 
 set_target_properties(test PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

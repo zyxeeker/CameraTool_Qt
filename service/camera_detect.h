@@ -4,6 +4,7 @@
 #include <QTcpSocket>
 #include <QUdpSocket>
 #include <QDebug>
+#include <QCameraInfo>
 #include "param.h"
 
 class CameraDetect {
@@ -16,9 +17,9 @@ public:
 
     void find_uvc_devices();
 
-    QMap<QString, Dev::NetDevice> get_net_devices() const { return m_netDeviceList; }
+    QMap<QString, Dev::NetDevice> getNetDevices() const { return m_netDeviceList; }
 
-    QMap<QString, Dev::UVCDevice> get_uvc_devices() const { return m_uvcDeviceList; }
+    QMap<QString, Dev::UVCDevice> getUVCDevices() const { return m_uvcDeviceList; }
 
 private:
     QUdpSocket *m_udp_socket = nullptr;

@@ -9,10 +9,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     GetLocalDetail();
+
     RefreshDeviceList();
+    RefreshUVCDeviceList();
 
     connect(ui->do_refresh, &QPushButton::clicked, this, [=]() {
         RefreshDeviceList();
+    });
+    connect(ui->do_uvc_refresh, &QPushButton::clicked, this, [=]() {
+        RefreshUVCDeviceList();
+    });
+    connect(ui->uvc_list, &QListWidget::itemClicked, this, [=]() {
+        UVCDeviceDetail();
     });
     connect(ui->list, &QListWidget::itemClicked, this, [=]() {
         DeviceDetail();
@@ -36,15 +44,23 @@ void MainWindow::DeviceDetail() {
 
     LOG::logger(LOG::LogLevel::INFO, "Selected device Ipv4:" + item->text().toStdString());
 
-    m_curNetDevice.ip = m_netDevices[item->text()].ip;
-    m_curNetDevice.mask = m_netDevices[item->text()].mask;
-    m_curNetDevice.gateway = m_netDevices[item->text()].gateway;
-    m_curNetDevice.mac = m_netDevices[item->text()].mac;
+    m_curNetDevice = m_netDevices[item->text()];
 
     ui->device_ip->setText(m_curNetDevice.ip);
     ui->device_mac->setText(m_curNetDevice.mac);
     ui->device_gateway->setText(m_curNetDevice.gateway);
     ui->mask->setText(m_curNetDevice.mask);
+}
+
+void MainWindow::UVCDeviceDetail() {
+    QListWidgetItem *item = ui->uvc_list->currentItem();
+    m_curUVCDevice = m_uvcDevices[item->text()];
+
+    ui->uvc_des->setText(m_curUVCDevice.des);
+    ui->p_1->setText(m_curUVCDevice.p1);
+    ui->p_2->setText(m_curUVCDevice.p2);
+    ui->p_3->setText(m_curUVCDevice.p3);
+    ui->p_4->setText(m_curUVCDevice.p4);
 }
 
 void MainWindow::RefreshDeviceList() {
@@ -54,13 +70,12 @@ void MainWindow::RefreshDeviceList() {
     LOG::logger(LOG::LogLevel::INFO, "Start Refreshing...");
 
     m_socket.find_net_devices();
-    m_netDevices = m_socket.get_net_devices();
+    m_netDevices = m_socket.getNetDevices();
     if (m_netDevices.size() == 0)
         LOG::logger(LOG::LogLevel::WARN, "Not found any device.");
 
-    for (auto iter : m_netDevices) {
+    for (auto iter : m_netDevices)
         ui->list->addItem(iter.ip);
-    }
 
     LOG::logger(LOG::LogLevel::INFO, "Refreshing list has finished!");
 }
@@ -132,6 +147,15 @@ void MainWindow::SetLocal() {
         cmd.waitForFinished();
         ui->statusbar->showMessage("成功!");
     }
+}
+
+void MainWindow::RefreshUVCDeviceList() {
+    ui->uvc_list->clear();
+    m_socket.find_uvc_devices();
+    m_uvcDevices = m_socket.getUVCDevices();
+
+    for (auto item : m_uvcDevices)
+        ui->uvc_list->addItem(item.des);
 
 }
 

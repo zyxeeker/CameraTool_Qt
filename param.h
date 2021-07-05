@@ -29,7 +29,7 @@ namespace Dev {
         QString mac;
         QString gateway;
         QString mask;
-    } Device;
+    } NetDevice;
 
     typedef struct Localhost {
         QString name;
@@ -40,7 +40,11 @@ namespace Dev {
     } Localhost;
 
     typedef struct UVCDevice {
-
+        QString p1;
+        QString p2;
+        QString p3;
+        QString p4;
+        QString des;
     } UVCDevice;
 
 }
