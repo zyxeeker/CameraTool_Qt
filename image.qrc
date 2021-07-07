@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="image">
+        <file>res/rotate.png</file>
+        <file>res/pause.png</file>
+        <file>res/start.png</file>
+        <file>res/stop.png</file>
+        <file>res/no_signal.png</file>
+    </qresource>
+</RCC>
