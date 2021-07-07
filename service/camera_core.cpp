@@ -43,7 +43,7 @@ void CameraCore::OpenCamera_test() {
     cv::VideoCapture cap;
     cap.open(0, cv::CAP_DSHOW);
 
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 680);
     cap.set(cv::CAP_PROP_FRAME_WIDTH, 680);
 
 //    cap.set(cv::CAP_PROP_FORMAT,-1);
@@ -53,25 +53,41 @@ void CameraCore::OpenCamera_test() {
 
     const char *windowsName = "Example";
 
-    int frame_1 = 100;
+    int frame_1 = 200;
+    int border_v = 0;
+    int border_h = 0;
 
-    CameraRecord recorder(cap.get(4), cap.get(3), 30.0);
+//    CameraRecord recorder(cap.get(3), cap.get(4), 30.0);
+    CameraRecord recorder(680, 680, 30.0);
     recorder.StartRecord();
 
     while (frame_1 != 0) {
         cv::Mat frame;
+        border_v = 0;
+        border_h = 0;
 
         bool statue = cap.read(frame);
         if (!statue) break;
 
 //        emit ;
-//        cv::transpose(frame, frame);
+        if (frame_1<=100)
+            cv::transpose(frame, frame);
+
+        double tmp_3 = double(frame.cols)/double(frame.rows);
+
+        if (tmp_3>=1)
+            border_v = (tmp_3*680-680)/2;
+        else
+            border_h = ((double(frame.rows)/double(frame.cols))*680-680)/2;
+
+        cv::copyMakeBorder(frame, frame, border_v, border_v, border_h, border_h, cv::BORDER_CONSTANT, 0);
+        cv::resize(frame,frame,cv::Size(680,680));
 
         recorder.Recorder(frame);
 
-        imshow(windowsName, frame);    //从视频对象中获取图片显示到窗口
+        cv::imshow(windowsName, frame);
 
-        cv::waitKey(10);    //每33毫秒一张图片
+        cv::waitKey(10);
         std::cout << frame_1 << std::endl;
         --frame_1;
     }
