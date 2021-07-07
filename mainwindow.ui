@@ -668,8 +668,7 @@
                                                                          <property name="icon">
                                                                              <iconset resource="image.qrc">
                                                                                  <normaloff>
-                                                                                     :/image/res/start.png
-                                                                                 </normaloff>
+                                                                                     :/image/res/start.png</normaloff>
                                                                                  :/image/res/start.png
                                                                              </iconset>
                                                                          </property>
@@ -683,8 +682,7 @@
                                                                          <property name="icon">
                                                                              <iconset resource="image.qrc">
                                                                                  <normaloff>
-                                                                                     :/image/res/pause.png
-                                                                                 </normaloff>
+                                                                                     :/image/res/pause.png</normaloff>
                                                                                  :/image/res/pause.png
                                                                              </iconset>
                                                                          </property>
@@ -698,8 +696,7 @@
                                                                          <property name="icon">
                                                                              <iconset resource="image.qrc">
                                                                                  <normaloff>
-                                                                                     :/image/res/stop.png
-                                                                                 </normaloff>
+                                                                                     :/image/res/stop.png</normaloff>
                                                                                  :/image/res/stop.png
                                                                              </iconset>
                                                                          </property>
@@ -713,8 +710,7 @@
                                                                          <property name="icon">
                                                                              <iconset resource="image.qrc">
                                                                                  <normaloff>
-                                                                                     :/image/res/rotate.png
-                                                                                 </normaloff>
+                                                                                     :/image/res/rotate.png</normaloff>
                                                                                  :/image/res/rotate.png
                                                                              </iconset>
                                                                          </property>

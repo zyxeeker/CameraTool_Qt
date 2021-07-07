@@ -5,52 +5,77 @@
 #include "camera_core.h"
 #include <iostream>
 
+
+bool CameraRecord::InitialCore() {
+    m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capHeight, m_capWidth), true);
+    if (!m_vOut.isOpened()) {
+        std::cout << "Recorder Fail!" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+void CameraRecord::Recorder(cv::Mat frame) {
+//    while (m_recordStatue)
+    m_vOut << frame;
+}
+
+void CameraRecord::StartRecord() {
+    if (!InitialCore())
+        std::cout << "ERROR!RECORDER!" << std::endl;
+
+}
+
+void CameraRecord::PauseRecord() {
+    m_recordStatue = false;
+}
+
+void CameraRecord::ResumeRecord() {
+    m_recordStatue = true;
+}
+
+void CameraRecord::StopRecord() {
+    m_recordStatue = false;
+    m_vOut.release();
+}
+
 void CameraCore::OpenCamera_test() {
     cv::VideoCapture cap;
-    cap.open(0);
+    cap.open(0, cv::CAP_DSHOW);
+
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 680);
+
+//    cap.set(cv::CAP_PROP_FORMAT,-1);
+
     if (!cap.isOpened())
         std::cout << "could not open the VideoCapture !" << std::endl;
 
     const char *windowsName = "Example";
 
-    while (m_previewStatue) {
+    int frame_1 = 100;
+
+    CameraRecord recorder(cap.get(4), cap.get(3), 30.0);
+    recorder.StartRecord();
+
+    while (frame_1 != 0) {
         cv::Mat frame;
-        bool ok = cap.read(frame);
-        if (!ok)    //判断视频文件是否读取结束
-            break;
+
+        bool statue = cap.read(frame);
+        if (!statue) break;
+
 //        emit ;
+//        cv::transpose(frame, frame);
+
+        recorder.Recorder(frame);
+
         imshow(windowsName, frame);    //从视频对象中获取图片显示到窗口
-        cv::waitKey(33);    //每33毫秒一张图片
+
+        cv::waitKey(10);    //每33毫秒一张图片
+        std::cout << frame_1 << std::endl;
+        --frame_1;
     }
 
-    cv::waitKey(-1);
-
-
-
-//    cv::VideoCapture* pCvDevice = new cv::VideoCapture;
-//    pCvDevice->open(0,cv::CAP_DSHOW);
-//    pCvDevice->set(cv::CAP_PROP_FORMAT,-1);
-
-//    while(true)
-//    {
-//        *pCvDevice >> buffer.buffer;
-//        buffer.bfid = ++this->mFrameCounter;
-//        cv::imshow("video",buffer.buffer);
-//    }
-//    auto *tmp_test = new cv::VideoCapture;
-//    cv::VideoCapture tmp_test(0);
-//    if(!tmp_test.isOpened())
-//    {
-//        std::cout<<"video not open."<<std::endl;
-//    }
-////    bool succ = tmp_test.open(0,cv::CAP_DSHOW);
-//
-////    std::cout<<succ<<std::endl;
-//    std::cout<<tmp_test.isOpened()<<std::endl;
-//
-//    cv::Mat frame;
-//    tmp_test.read(frame);
-//    tmp_test>>frame;
-//return nullptr;
-
+    recorder.StopRecord();
+    cap.release();
 }
