@@ -11,10 +11,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(OpenCV_DIR "opencv341")
+set(OpenCV_DIR opencv341/x64/vc16/lib)
 
-#set(OpenCV_DIR ${PROJECT_SOURCE_DIR}/opencv341/x64/vc16/lib)
-#set(OpenCV_INCLUDES ${PROJECT_SOURCE_DIR}/opencv341/include)
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package( ...) calls below.
@@ -58,6 +56,7 @@ else()
     else ()
         add_executable(test
                 ${PROJECT_SOURCES}
+                image.qrc
                 )
     endif ()
 endif ()
