@@ -5,8 +5,17 @@
 #include <QMessageBox>
 #include <QProcess>
 
+void MainWindow::Display(cv::Mat frame) {
+    cv::Mat tmp = frame;
+    QImage Img;
+    cv::cvtColor(frame, frame, CV_RGB2BGR);
+    Img = QImage((const uchar*)(tmp.data), tmp.cols, tmp.rows, tmp.cols*tmp.channels(), QImage::Format_RGB888);
+    ui->frame->setPixmap(QPixmap::fromImage(Img));
+}
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    qRegisterMetaType<cv::Mat>("cv::Mat");
 
     GetLocalDetail();
 
@@ -37,6 +46,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->gateway_input->setText(m_curNetDevice.gateway);
         ui->mask_input->setText(m_curNetDevice.mask);
     });
+    connect(ui->open_btn, &QPushButton::clicked, this, [=](){
+        m_cameraCore = new CameraCore();
+        connect(m_cameraCore, SIGNAL(SendFrame(cv::Mat)),this, SLOT(Display(cv::Mat)));
+        m_cameraCore->start();
+    });
+
 }
 
 void MainWindow::DeviceDetail() {
@@ -160,6 +175,7 @@ void MainWindow::RefreshUVCDeviceList() {
 }
 
 MainWindow::~MainWindow() {
+    m_cameraCore->quit();
     delete ui;
 }
 

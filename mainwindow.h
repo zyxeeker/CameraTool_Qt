@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include <QNetworkAddressEntry>
 #include "service/camera_detect.h"
+#include "service/camera_core.h"
 #include "param.h"
 #include "logger/logger.h"
+#include "opencv2/opencv.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,6 +36,7 @@ public:
 private:
     Ui::MainWindow *ui;
     CameraDetect m_detectService;
+    CameraCore *m_cameraCore;
     QMap<QString, Dev::NetDevice> m_netDevices;
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
 
@@ -42,5 +45,10 @@ private:
     Dev::UVCDevice m_curUVCDevice;
 
 
+
+    void _test();
+
+private slots:
+    void Display(cv::Mat frame);
 };
 #endif // MAINWINDOW_H

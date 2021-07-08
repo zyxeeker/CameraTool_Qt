@@ -596,11 +596,22 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="do_uvc_refresh">
-                   <property name="text">
-                    <string>刷新列表</string>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <item>
+                    <widget class="QPushButton" name="do_uvc_refresh">
+                     <property name="text">
+                      <string>刷新列表</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="open_btn">
+                     <property name="text">
+                      <string>打开该设备</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </item>

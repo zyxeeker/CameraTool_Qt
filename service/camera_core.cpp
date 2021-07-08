@@ -4,7 +4,7 @@
 
 #include "camera_core.h"
 #include <iostream>
-
+#define TEST_DEBUG 0
 
 bool CameraRecord::InitialCore() {
     m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capHeight, m_capWidth), true);
@@ -39,37 +39,39 @@ void CameraRecord::StopRecord() {
     m_vOut.release();
 }
 
-void CameraCore::OpenCamera_test() {
-    cv::VideoCapture cap;
-    cap.open(0, cv::CAP_DSHOW);
+bool CameraCore::OpenCamera() {
+    m_cap.open(0, cv::CAP_DSHOW);
+    if (!m_cap.isOpened()) {
+        std::cout << "could not open the VideoCapture !" << std::endl;
+        return false;
+    }
 
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 680);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 680);
+    m_cap.set(cv::CAP_PROP_FRAME_HEIGHT, 680);
+    m_cap.set(cv::CAP_PROP_FRAME_WIDTH, 680);
 
 //    cap.set(cv::CAP_PROP_FORMAT,-1);
 
-    if (!cap.isOpened())
-        std::cout << "could not open the VideoCapture !" << std::endl;
 
     const char *windowsName = "Example";
 
     int frame_1 = 200;
+#if TEST_DEBUG
     int border_v = 0;
     int border_h = 0;
-
-//    CameraRecord recorder(cap.get(3), cap.get(4), 30.0);
+#endif
+#if TEST_DEBUG
+    //    CameraRecord recorder(cap.get(3), cap.get(4), 30.0);
     CameraRecord recorder(680, 680, 30.0);
     recorder.StartRecord();
 
     while (frame_1 != 0) {
         cv::Mat frame;
+        m_cap.read(frame);
+        if (!statue) break;
+#endif
+#if TEST_DEBUG
         border_v = 0;
         border_h = 0;
-
-        bool statue = cap.read(frame);
-        if (!statue) break;
-
-//        emit ;
         if (frame_1<=100)
             cv::transpose(frame, frame);
 
@@ -83,7 +85,8 @@ void CameraCore::OpenCamera_test() {
         cv::copyMakeBorder(frame, frame, border_v, border_v, border_h, border_h, cv::BORDER_CONSTANT, 0);
         cv::resize(frame,frame,cv::Size(680,680));
 
-        recorder.Recorder(frame);
+
+//        recorder.Recorder(frame);
 
         cv::imshow(windowsName, frame);
 
@@ -92,6 +95,20 @@ void CameraCore::OpenCamera_test() {
         --frame_1;
     }
 
-    recorder.StopRecord();
-    cap.release();
+//    recorder.StopRecord();
+#endif
+}
+
+void CameraCore::CameraPreview() {
+    cv::Mat frame;
+    while(m_previewStatue) {
+        m_cap.read(frame);
+        emit SendFrame(frame);
+        cv::waitKey(30);
+    }
+}
+
+void CameraCore::run() {
+    if (OpenCamera())
+        CameraPreview();
 }
