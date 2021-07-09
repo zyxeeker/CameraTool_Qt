@@ -41,7 +41,7 @@ set(PROJECT_SOURCES
         service/camera_detect.h
         service/camera_detect.cpp
         param.h
-        logger/logger.cpp logger/logger.h service/camera_core.cpp service/camera_core.h)
+        logger/logger.cpp logger/logger.h service/camera_core.cpp service/camera_core.h service/camera_record.cpp service/camera_record.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(test

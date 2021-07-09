@@ -6,6 +6,7 @@
 #include <QCloseEvent>
 #include "service/camera_detect.h"
 #include "service/camera_core.h"
+#include "service/camera_record.h"
 #include "param.h"
 #include "logger/logger.h"
 #include "opencv2/opencv.hpp"

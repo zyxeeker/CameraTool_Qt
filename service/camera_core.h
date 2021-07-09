@@ -9,41 +9,6 @@
 #include <QThread>
 #include <string>
 
-//TODO 初始化core作为private函数
-//TODO 加入QT线程防止UI卡死
-//TODO 加入信号槽连接UI界面
-
-class CameraRecord : public QThread{
-    Q_OBJECT
-public:
-    CameraRecord(double capHeight, double capWidth, double fps) :
-            m_capHeight(capHeight), m_capWidth(capWidth), m_fps(fps) {};
-    ~CameraRecord() { m_vOut.release(); }
-
-    bool InitialCore();
-
-//    void PauseRecord();
-//
-//    void ResumeRecord();
-    void stop() { m_vOut.release(); }
-    bool t1;
-protected:
-    void run() override;
-private:
-    bool m_pause = false;
-
-    cv::VideoWriter m_vOut;
-    cv::Mat m_frame;
-    std::string m_filePath;
-    double m_fps;
-    double m_capHeight;
-    double m_capWidth;
-private slots:
-    void GetFrame(cv::Mat frame) { m_frame = frame; }
-};
-
-
-
 class CameraCore : public QThread {
     Q_OBJECT
 public:
@@ -65,7 +30,6 @@ private:
     bool m_curMark = false;
     cv::VideoCapture m_cap;
     bool m_previewStatue = true;
-    CameraRecord *m_recordService;
 
 signals:
     void SendFrame(cv::Mat frame);
