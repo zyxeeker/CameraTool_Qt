@@ -64,19 +64,22 @@ bool CameraCore::OpenCamera() {
 
 //    recorder.StopRecord();
 #endif
+    return true;
 }
 
 void CameraCore::CameraPreview() {
     cv::Mat frame;
-    while(m_previewStatue) {
-        m_cap.read(frame);
-        emit SendFrame(frame);
-        if (m_curMark)
-            emit SendFrame2Record(frame);
-#if 1
-//        std::cout<<m_curMark<<std::endl;
-        cv::waitKey(2);
+    while(true) {
+        if (m_previewStatue) {
+            m_cap.read(frame);
+            emit SendFrame(frame);
+            if (m_curMark)
+                emit SendFrame2Record(frame);
+#if TEST_DEBUG
+            std::cout << m_curMark << std::endl;
+            cv::waitKey(30);
 #endif
+        }
     }
 }
 
