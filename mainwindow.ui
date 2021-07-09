@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>650</height>
+    <height>694</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>630</width>
-    <height>650</height>
+    <height>694</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -29,8 +29,46 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <family>Leelawadee UI</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane {
+border:none;
+border-top:3px solid #4a89dc;
+background:transparent;
+}
+QTabWidget::tab-bar {
+border:none;
+}
+QTabBar::tab {
+border: none;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+color: rgb(0, 0, 0);
+background: rgb(255, 255, 255, 255);
+height: 28px;
+min-width: 85px;
+margin-right: 5px;
+padding-left: 5px;
+padding-right: 5px;
+}
+QTabBar::tab:hover {
+background: #5d9cec;
+}
+QTabBar::tab:selected {
+color: white;
+background: #4a89dc;
+}
+</string>
+      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="udp">
        <attribute name="title">
@@ -43,6 +81,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <widget class="QLabel" name="label_13">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>在线设备：</string>
               </property>
@@ -57,6 +101,12 @@
            <layout class="QGridLayout" name="gridLayout_7">
             <item row="0" column="0">
              <widget class="QGroupBox" name="groupBox">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="title">
                <string>设备网络参数</string>
               </property>
@@ -177,6 +227,39 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="do_refresh">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+                   </property>
                    <property name="text">
                     <string>刷新设备</string>
                    </property>
@@ -189,6 +272,12 @@
             </item>
             <item row="1" column="0">
              <widget class="QGroupBox" name="groupBox_2">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="title">
                <string>本机网络参数</string>
               </property>
@@ -316,6 +405,39 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="local_refresh">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+                   </property>
                    <property name="text">
                     <string>重新获取</string>
                    </property>
@@ -328,6 +450,12 @@
             </item>
             <item row="2" column="0">
              <widget class="QGroupBox" name="groupBox_3">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="title">
                <string>本机网络参数设定</string>
               </property>
@@ -455,6 +583,39 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="apply">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+                   </property>
                    <property name="text">
                     <string>应用</string>
                    </property>
@@ -498,6 +659,12 @@
            <layout class="QGridLayout" name="gridLayout_6">
             <item row="0" column="0">
              <widget class="QGroupBox" name="groupBox_6">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="title">
                <string>设备详情</string>
               </property>
@@ -538,6 +705,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="label_8">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
                    <property name="text">
                     <string>参数1：</string>
                    </property>
@@ -552,6 +725,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="label_9">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
                    <property name="text">
                     <string>参数2：</string>
                    </property>
@@ -566,6 +745,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="label_10">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
                    <property name="text">
                     <string>参数3：</string>
                    </property>
@@ -580,6 +765,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="label_11">
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
                    <property name="text">
                     <string>参数4：</string>
                    </property>
@@ -599,6 +790,33 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_7">
                    <item>
                     <widget class="QPushButton" name="do_uvc_refresh">
+                     <property name="font">
+                      <font>
+                       <family>Microsoft YaHei UI</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+</string>
+                     </property>
                      <property name="text">
                       <string>刷新列表</string>
                      </property>
@@ -606,6 +824,40 @@
                    </item>
                    <item>
                     <widget class="QPushButton" name="open_btn">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Microsoft YaHei UI</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+                     </property>
                      <property name="text">
                       <string>打开设备</string>
                      </property>
@@ -615,6 +867,37 @@
                     <widget class="QPushButton" name="close_btn">
                      <property name="enabled">
                       <bool>false</bool>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Microsoft YaHei UI</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
                      </property>
                      <property name="text">
                       <string>关闭设备</string>
@@ -630,6 +913,12 @@
             </item>
             <item row="2" column="0">
              <widget class="QGroupBox" name="groupBox_5">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="title">
                <string>录制</string>
               </property>
@@ -640,6 +929,37 @@
                   <widget class="QPushButton" name="start_btn">
                    <property name="enabled">
                     <bool>false</bool>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
                    </property>
                    <property name="text">
                     <string>开始</string>
@@ -655,6 +975,37 @@
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+                   </property>
                    <property name="text">
                     <string>暂停</string>
                    </property>
@@ -669,6 +1020,37 @@
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+                   </property>
                    <property name="text">
                     <string>停止</string>
                    </property>
@@ -682,6 +1064,37 @@
                   <widget class="QPushButton" name="rotate_btn">
                    <property name="enabled">
                     <bool>false</bool>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Microsoft YaHei UI</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
                    </property>
                    <property name="text">
                     <string>翻转</string>
@@ -699,6 +1112,12 @@
             </item>
             <item row="1" column="0">
              <widget class="QGroupBox" name="groupBox_4">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="title">
                <string>图像预览</string>
               </property>
@@ -774,6 +1193,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
              <widget class="QLabel" name="label_7">
+              <property name="font">
+               <font>
+                <family>Microsoft YaHei UI</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>在线设备：</string>
               </property>
@@ -786,6 +1211,12 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+                <stylestrategy>PreferAntialias</stylestrategy>
+               </font>
               </property>
              </widget>
             </item>
