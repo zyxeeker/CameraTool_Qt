@@ -22,6 +22,8 @@ public:
 
     void CameraPreview();
 
+    void SetStatue(bool mark) ;
+
     bool GetCurMark() { return m_curMark; }
 
 protected:

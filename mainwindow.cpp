@@ -229,11 +229,10 @@ MainWindow::~MainWindow() {
 void MainWindow::closeEvent(QCloseEvent *event) {
     if (m_cameraCore.isRunning()) {
         if (m_cameraCore.GetCurMark()) {
-            if (QMessageBox::warning(NULL, "注意", "请直连设备！", QMessageBox::Close) == QMessageBox::Close)
+            if (QMessageBox::warning(NULL, "注意", "请停止录制后再退出！", QMessageBox::Close) == QMessageBox::Close)
                 event->ignore();
         }
         else
             m_cameraCore.terminate();
     }
-
 }
