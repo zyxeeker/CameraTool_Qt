@@ -24,8 +24,12 @@ void CameraRecord::run() {
     InitialCore();
     while (t1) {
         if (!m_frame.empty()) {
-            if (!m_pause)
-                m_vOut << m_frame;
+            cv::Mat tmp;
+            cv::cvtColor(m_frame, tmp, cv::COLOR_BGR2RGB);
+            if (!m_pause) {
+                m_vOut << tmp;
+                cv::waitKey(30);
+            }
         }
     }
     m_vOut.release();
