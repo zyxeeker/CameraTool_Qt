@@ -7,7 +7,8 @@
 #define TEST_DEBUG 0
 
 bool CameraRecord::InitialCore() {
-    m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capHeight, m_capWidth), true);
+    t1 = true;
+    m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capWidth, m_capHeight), true);
     if (!m_vOut.isOpened()) {
         std::cout << "Recorder Fail!" << std::endl;
         return false;
@@ -15,29 +16,24 @@ bool CameraRecord::InitialCore() {
     return true;
 }
 
-void CameraRecord::Recorder(cv::Mat frame) {
-//    while (m_recordStatue)
-    m_vOut << frame;
-}
+//void CameraRecord::PauseRecord() {
+//}
+//
+//void CameraRecord::ResumeRecord() {
+//}
 
-void CameraRecord::StartRecord() {
-    if (!InitialCore())
-        std::cout << "ERROR!RECORDER!" << std::endl;
 
-}
-
-void CameraRecord::PauseRecord() {
-    m_recordStatue = false;
-}
-
-void CameraRecord::ResumeRecord() {
-    m_recordStatue = true;
-}
-
-void CameraRecord::StopRecord() {
-    m_recordStatue = false;
+void CameraRecord::run() {
+    InitialCore();
+    while (t1) {
+        if (!m_frame.empty()) {
+            if (!m_pause)
+                m_vOut << m_frame;
+        }
+    }
     m_vOut.release();
 }
+
 
 bool CameraCore::OpenCamera() {
     m_cap.open(0, cv::CAP_DSHOW);
@@ -104,11 +100,17 @@ void CameraCore::CameraPreview() {
     while(m_previewStatue) {
         m_cap.read(frame);
         emit SendFrame(frame);
-        cv::waitKey(30);
+        if (m_curMark)
+            emit SendFrame2Record(frame);
+#if 1
+//        std::cout<<m_curMark<<std::endl;
+        cv::waitKey(2);
+#endif
     }
 }
 
 void CameraCore::run() {
-    if (OpenCamera())
+    if (OpenCamera()) {
         CameraPreview();
+    }
 }

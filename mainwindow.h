@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QNetworkAddressEntry>
+#include <QCloseEvent>
 #include "service/camera_detect.h"
 #include "service/camera_core.h"
 #include "param.h"
@@ -33,10 +34,14 @@ public:
 
     ~MainWindow();
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private:
     Ui::MainWindow *ui;
     CameraDetect m_detectService;
-    CameraCore *m_cameraCore;
+    CameraCore m_cameraCore;
+    CameraRecord *m_cameraRecord;
     QMap<QString, Dev::NetDevice> m_netDevices;
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
 
@@ -44,11 +49,10 @@ private:
     Dev::NetDevice m_curNetDevice;
     Dev::UVCDevice m_curUVCDevice;
 
-
-
-    void _test();
-
 private slots:
     void Display(cv::Mat frame);
+signals:
+    void SendStatue(bool statue);
+    void SetRecordStatue(bool mark);
 };
 #endif // MAINWINDOW_H

@@ -17,48 +17,63 @@ class CameraRecord : public QThread{
     Q_OBJECT
 public:
     CameraRecord(double capHeight, double capWidth, double fps) :
-            m_capHeight(capHeight), m_capWidth(capWidth), m_fps(fps) {}
+            m_capHeight(capHeight), m_capWidth(capWidth), m_fps(fps) {};
+    ~CameraRecord() { m_vOut.release(); }
 
     bool InitialCore();
 
-    void StartRecord();
-
-    void PauseRecord();
-
-    void ResumeRecord();
-
-    void StopRecord();
-
-    void Recorder(cv::Mat frame);
-
+//    void PauseRecord();
+//
+//    void ResumeRecord();
+    void stop() { m_vOut.release(); }
+    bool t1;
+protected:
+    void run() override;
 private:
-    cv::VideoWriter m_vOut;
+    bool m_pause = false;
 
+    cv::VideoWriter m_vOut;
+    cv::Mat m_frame;
     std::string m_filePath;
     double m_fps;
     double m_capHeight;
     double m_capWidth;
-
-    bool m_recordStatue = true;
+private slots:
+    void GetFrame(cv::Mat frame) { m_frame = frame; }
 };
+
+
 
 class CameraCore : public QThread {
     Q_OBJECT
 public:
-    ~CameraCore() { m_cap.release(); }
+    ~CameraCore() {
+#if 1
+        std::cout<<"Thread Destroyed!"<<std::endl;
+#endif
+        m_cap.release(); }
+
     bool OpenCamera();
 
     void CameraPreview();
+
+    bool GetCurMark() { return m_curMark; }
+
 protected:
     void run() override;
 private:
+    bool m_curMark = false;
     cv::VideoCapture m_cap;
     bool m_previewStatue = true;
+    CameraRecord *m_recordService;
+
 signals:
-    bool SendStatue();
     void SendFrame(cv::Mat frame);
-//private slots:
-//    bool SetPreviewStatue(bool statue);
+    void SendFrame2Record(cv::Mat frame);
+
+private slots:
+    void SetPreviewStatue(bool statue) { m_previewStatue = statue; }
+    void _SetRecordStatue(bool st) { m_curMark = st; }
 };
 
 

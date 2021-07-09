@@ -6,21 +6,33 @@
 #include <QProcess>
 
 void MainWindow::Display(cv::Mat frame) {
-    cv::Mat tmp = frame;
+//    if (frame.empty())
+//        ui->close_btn->setEnabled(false);
+//    else
+//        ui->close_btn->setEnabled(true);
     QImage Img;
     cv::cvtColor(frame, frame, CV_RGB2BGR);
-    Img = QImage((const uchar*)(tmp.data), tmp.cols, tmp.rows, tmp.cols*tmp.channels(), QImage::Format_RGB888);
-    ui->frame->setPixmap(QPixmap::fromImage(Img));
+    Img = QImage((const uchar*)(frame.data), frame.cols, frame.rows, frame.cols*frame.channels(), QImage::Format_RGB888);
+    QPixmap tmp = QPixmap::fromImage(Img);
+    ui->frame->setPixmap(tmp);
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    m_cameraRecord = new CameraRecord(480, 640, 30.0);
+
     qRegisterMetaType<cv::Mat>("cv::Mat");
 
     GetLocalDetail();
 
     RefreshDeviceList();
     RefreshUVCDeviceList();
+
+    connect(&m_cameraCore, SIGNAL(SendFrame(cv::Mat)),this, SLOT(Display(cv::Mat)));
+    connect(this, SIGNAL(SendStatue(bool)), &m_cameraCore, SLOT(SetPreviewStatue(bool)));
+    connect(this, SIGNAL(SetRecordStatue(bool)), &m_cameraCore, SLOT(_SetRecordStatue(bool)));
+    connect(&m_cameraCore, SIGNAL(SendFrame2Record(cv::Mat)),m_cameraRecord, SLOT(GetFrame(cv::Mat)));
 
     connect(ui->do_refresh, &QPushButton::clicked, this, [=]() {
         RefreshDeviceList();
@@ -47,9 +59,45 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->mask_input->setText(m_curNetDevice.mask);
     });
     connect(ui->open_btn, &QPushButton::clicked, this, [=](){
-        m_cameraCore = new CameraCore();
-        connect(m_cameraCore, SIGNAL(SendFrame(cv::Mat)),this, SLOT(Display(cv::Mat)));
-        m_cameraCore->start();
+        if (m_cameraCore.isRunning())
+            emit SendStatue(true);
+        else
+            m_cameraCore.start();
+        ui->open_btn->setEnabled(false);
+        ui->close_btn->setEnabled(true);
+        ui->start_btn->setEnabled(true);
+        ui->rotate_btn->setEnabled(true);
+    });
+    connect(ui->close_btn, &QPushButton::clicked, this, [=](){
+        emit SendStatue(false);
+        ui->close_btn->setEnabled(false);
+        ui->open_btn->setEnabled(true);
+        ui->start_btn->setEnabled(false);
+        ui->pause_btn->setEnabled(false);
+        ui->stop_btn->setEnabled(false);
+        ui->rotate_btn->setEnabled(false);
+    });
+    connect(ui->start_btn, &QPushButton::clicked, this, [=](){
+        m_cameraRecord->start();
+        emit SetRecordStatue(true);
+        ui->start_btn->setEnabled(false);
+        ui->pause_btn->setEnabled(true);
+        ui->stop_btn->setEnabled(true);
+        ui->rotate_btn->setEnabled(true);
+    });
+    connect(ui->pause_btn, &QPushButton::clicked, this, [=](){
+        ui->pause_btn->setText("继续");
+
+    });
+    connect(ui->stop_btn, &QPushButton::clicked, this, [=](){
+        emit SetRecordStatue(false);
+        m_cameraRecord->t1 = false;
+        ui->start_btn->setEnabled(true);
+        ui->stop_btn->setEnabled(false);
+        ui->pause_btn->setEnabled(false);
+    });
+    connect(ui->rotate_btn, &QPushButton::clicked, this, [=](){
+
     });
 
 }
@@ -175,7 +223,17 @@ void MainWindow::RefreshUVCDeviceList() {
 }
 
 MainWindow::~MainWindow() {
-    m_cameraCore->quit();
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if (m_cameraCore.isRunning()) {
+        if (m_cameraCore.GetCurMark()) {
+            if (QMessageBox::warning(NULL, "注意", "请直连设备！", QMessageBox::Close) == QMessageBox::Close)
+                event->ignore();
+        }
+        else
+            m_cameraCore.terminate();
+    }
+
+}

@@ -607,7 +607,17 @@
                    <item>
                     <widget class="QPushButton" name="open_btn">
                      <property name="text">
-                      <string>打开该设备</string>
+                      <string>打开设备</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="close_btn">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="text">
+                      <string>关闭设备</string>
                      </property>
                     </widget>
                    </item>
@@ -628,6 +638,9 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
                   <widget class="QPushButton" name="start_btn">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="text">
                     <string>开始</string>
                    </property>
@@ -639,6 +652,9 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="pause_btn">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="text">
                     <string>暂停</string>
                    </property>
@@ -650,6 +666,9 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="stop_btn">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="text">
                     <string>停止</string>
                    </property>
@@ -661,6 +680,9 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="rotate_btn">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="text">
                     <string>翻转</string>
                    </property>
