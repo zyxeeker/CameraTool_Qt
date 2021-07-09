@@ -6,15 +6,13 @@
 #include <QProcess>
 
 void MainWindow::Display(cv::Mat frame) {
-//    if (frame.empty())
-//        ui->close_btn->setEnabled(false);
-//    else
+//    if (!frame.empty())
 //        ui->close_btn->setEnabled(true);
+    cv::Mat tmp;
     QImage Img;
-    cv::cvtColor(frame, frame, CV_RGB2BGR);
-    Img = QImage((const uchar*)(frame.data), frame.cols, frame.rows, frame.cols*frame.channels(), QImage::Format_RGB888);
-    QPixmap tmp = QPixmap::fromImage(Img);
-    ui->frame->setPixmap(tmp);
+    cv::cvtColor(frame, tmp, CV_RGB2BGR);
+    Img = QImage((const uchar*)(tmp.data), tmp.cols, tmp.rows, tmp.cols*frame.channels(), QImage::Format_RGB888);
+    ui->frame->setPixmap(QPixmap::fromImage(Img));
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -61,8 +59,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->open_btn, &QPushButton::clicked, this, [=](){
         if (m_cameraCore.isRunning())
             emit SendStatue(true);
-        else
+        else {
+            std::cout <<"1"<<std::endl;
             m_cameraCore.start();
+        }
         ui->open_btn->setEnabled(false);
         ui->close_btn->setEnabled(true);
         ui->start_btn->setEnabled(true);
