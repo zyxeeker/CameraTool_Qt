@@ -30,6 +30,7 @@ private:
     bool m_curMark = false;
     cv::VideoCapture m_cap;
     bool m_previewStatue = true;
+    bool m_rotateStatue = false;
 
 signals:
     void SendFrame(cv::Mat frame);
@@ -37,7 +38,10 @@ signals:
 
 private slots:
     void SetPreviewStatue(bool statue) { m_previewStatue = statue; }
+
     void _SetRecordStatue(bool st) { m_curMark = st; }
+
+    void SetRotateFrame(bool mark) { m_rotateStatue = mark; }
 };
 
 

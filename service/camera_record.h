@@ -8,22 +8,27 @@
 #include <opencv2/opencv.hpp>
 #include <QThread>
 
-class CameraRecord : public QThread{
+class CameraRecord : public QThread {
 Q_OBJECT
 public:
     CameraRecord(double capHeight, double capWidth, double fps) :
             m_capHeight(capHeight), m_capWidth(capWidth), m_fps(fps) {};
+
     ~CameraRecord() { m_vOut.release(); }
 
     bool InitialCore();
+
+    cv::Mat HandleFrame(cv::Mat frame);
 
 //    void PauseRecord();
 //
 //    void ResumeRecord();
     void stop() { m_vOut.release(); }
+
     bool t1;
 protected:
     void run() override;
+
 private:
     bool m_pause = false;
 

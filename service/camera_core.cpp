@@ -72,13 +72,13 @@ void CameraCore::CameraPreview() {
     while(true) {
         if (m_previewStatue) {
             m_cap.read(frame);
+            if (m_rotateStatue) {
+                cv::transpose(frame, frame);
+                cv::flip(frame, frame, 1);
+            }
             emit SendFrame(frame);
             if (m_curMark)
-                emit SendFrame2Record(frame);
-#if TEST_DEBUG
-            std::cout << m_curMark << std::endl;
-            cv::waitKey(30);
-#endif
+                    emit SendFrame2Record(frame);
         }
     }
 }

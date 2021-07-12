@@ -20,14 +20,30 @@ bool CameraRecord::InitialCore() {
 //void CameraRecord::ResumeRecord() {
 //}
 
+cv::Mat CameraRecord::HandleFrame(cv::Mat frame) {
+    int border_v = 0;
+    int border_h = 0;
+
+    double VofH = double(frame.cols) / double(frame.rows);
+
+    if (VofH >= 1)
+        border_v = (VofH * m_capHeight - m_capWidth) / 2;
+    else
+        border_h = ((double(frame.rows) / double(frame.cols)) * 680 - 680) / 2;
+
+    cv::copyMakeBorder(frame, frame, border_v, border_v, border_h, border_h, cv::BORDER_CONSTANT, 0);
+    cv::resize(frame, frame, cv::Size(m_capWidth, m_capHeight));
+    return frame;
+}
+
+
 void CameraRecord::run() {
     InitialCore();
     while (t1) {
         if (!m_frame.empty()) {
-            cv::Mat tmp;
-            cv::cvtColor(m_frame, tmp, cv::COLOR_BGR2RGB);
             if (!m_pause) {
-                m_vOut << tmp;
+                cv::Mat frame = HandleFrame(m_frame);
+                m_vOut << frame;
                 cv::waitKey(30);
             }
         }

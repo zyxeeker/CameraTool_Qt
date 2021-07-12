@@ -18,7 +18,7 @@ void MainWindow::Display(cv::Mat frame) {
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    m_cameraRecord = new CameraRecord(480, 640, 30.0);
+    m_cameraRecord = new CameraRecord(640, 640, 30.0);
 
     qRegisterMetaType<cv::Mat>("cv::Mat");
 
@@ -30,7 +30,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(&m_cameraCore, SIGNAL(SendFrame(cv::Mat)),this, SLOT(Display(cv::Mat)));
     connect(this, SIGNAL(SendStatue(bool)), &m_cameraCore, SLOT(SetPreviewStatue(bool)));
     connect(this, SIGNAL(SetRecordStatue(bool)), &m_cameraCore, SLOT(_SetRecordStatue(bool)));
-    connect(&m_cameraCore, SIGNAL(SendFrame2Record(cv::Mat)),m_cameraRecord, SLOT(GetFrame(cv::Mat)));
+    connect(&m_cameraCore, SIGNAL(SendFrame2Record(cv::Mat)), m_cameraRecord, SLOT(GetFrame(cv::Mat)));
+    connect(this, SIGNAL(SetRotateStatue(bool)), &m_cameraCore, SLOT(SetRotateFrame(bool)));
 
     connect(ui->do_refresh, &QPushButton::clicked, this, [=]() {
         RefreshDeviceList();
@@ -96,8 +97,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->stop_btn->setEnabled(false);
         ui->pause_btn->setEnabled(false);
     });
-    connect(ui->rotate_btn, &QPushButton::clicked, this, [=](){
-
+    connect(ui->rotate_btn, &QPushButton::clicked, this, [=]() {
+        if (ui->rotate_btn->isChecked())
+                emit SetRotateStatue(true);
+        else
+                emit SetRotateStatue(false);
     });
 
 }
