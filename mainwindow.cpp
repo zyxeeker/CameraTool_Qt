@@ -60,10 +60,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->open_btn, &QPushButton::clicked, this, [=](){
         if (m_cameraCore.isRunning())
             emit SendStatue(true);
-        else {
-            std::cout <<"1"<<std::endl;
+        else
             m_cameraCore.start();
-        }
         ui->open_btn->setEnabled(false);
         ui->close_btn->setEnabled(true);
         ui->start_btn->setEnabled(true);
@@ -78,9 +76,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->stop_btn->setEnabled(false);
         ui->rotate_btn->setEnabled(false);
     });
-    connect(ui->start_btn, &QPushButton::clicked, this, [=](){
-        m_cameraRecord->start();
+    connect(ui->start_btn, &QPushButton::clicked, this, [=]() {
         emit SetRecordStatue(true);
+        m_cameraRecord->start();
         ui->start_btn->setEnabled(false);
         ui->pause_btn->setEnabled(true);
         ui->stop_btn->setEnabled(true);

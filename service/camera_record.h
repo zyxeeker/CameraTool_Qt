@@ -14,22 +14,19 @@ public:
     CameraRecord(double capHeight, double capWidth, double fps) :
             m_capHeight(capHeight), m_capWidth(capWidth), m_fps(fps) {};
 
-    ~CameraRecord() { m_vOut.release(); }
-
     bool InitialCore();
 
     cv::Mat HandleFrame(cv::Mat frame);
 
     void PauseRecord(bool st) { m_pause = st; }
 
-//
     void StopRecord(bool st) { m_statue = st; }
 
 protected:
     void run() override;
 
 private:
-    bool m_statue = true;
+    bool m_statue;
     bool m_pause = false;
     cv::VideoWriter m_vOut;
     cv::Mat m_frame;

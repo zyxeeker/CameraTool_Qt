@@ -22,7 +22,7 @@ cv::Mat CameraRecord::HandleFrame(cv::Mat frame) {
     if (VofH >= 1)
         border_v = (VofH * m_capHeight - m_capWidth) / 2;
     else
-        border_h = ((double(frame.rows) / double(frame.cols)) * 680 - 680) / 2;
+        border_h = ((double(frame.rows) / double(frame.cols)) * m_capWidth - m_capHeight) / 2;
 
     cv::copyMakeBorder(frame, frame, border_v, border_v, border_h, border_h, cv::BORDER_CONSTANT, 0);
     cv::resize(frame, frame, cv::Size(m_capWidth, m_capHeight));
@@ -30,6 +30,7 @@ cv::Mat CameraRecord::HandleFrame(cv::Mat frame) {
 }
 
 void CameraRecord::run() {
+    m_statue = true;
     InitialCore();
     while (m_statue) {
         if (!m_frame.empty()) {
