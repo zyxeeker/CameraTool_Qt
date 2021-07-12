@@ -20,18 +20,17 @@ public:
 
     cv::Mat HandleFrame(cv::Mat frame);
 
-//    void PauseRecord();
-//
-//    void ResumeRecord();
-    void stop() { m_vOut.release(); }
+    void PauseRecord(bool st) { m_pause = st; }
 
-    bool t1;
+//
+    void StopRecord(bool st) { m_statue = st; }
+
 protected:
     void run() override;
 
 private:
+    bool m_statue = true;
     bool m_pause = false;
-
     cv::VideoWriter m_vOut;
     cv::Mat m_frame;
     std::string m_filePath;

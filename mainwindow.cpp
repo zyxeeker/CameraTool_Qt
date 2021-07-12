@@ -87,12 +87,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->rotate_btn->setEnabled(true);
     });
     connect(ui->pause_btn, &QPushButton::clicked, this, [=](){
-        ui->pause_btn->setText("继续");
-
+        if (ui->pause_btn->text() == "继续") {
+            ui->pause_btn->setText("暂停");
+            m_cameraRecord->PauseRecord(false);
+        } else {
+            ui->pause_btn->setText("继续");
+            m_cameraRecord->PauseRecord(true);
+        }
     });
     connect(ui->stop_btn, &QPushButton::clicked, this, [=](){
         emit SetRecordStatue(false);
-        m_cameraRecord->t1 = false;
+        m_cameraRecord->StopRecord(false);
         ui->start_btn->setEnabled(true);
         ui->stop_btn->setEnabled(false);
         ui->pause_btn->setEnabled(false);

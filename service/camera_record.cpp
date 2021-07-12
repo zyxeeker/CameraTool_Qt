@@ -5,7 +5,6 @@
 #include "camera_record.h"
 
 bool CameraRecord::InitialCore() {
-    t1 = true;
     m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capWidth, m_capHeight), true);
     if (!m_vOut.isOpened()) {
         std::cout << "Recorder Fail!" << std::endl;
@@ -13,12 +12,6 @@ bool CameraRecord::InitialCore() {
     }
     return true;
 }
-
-//void CameraRecord::PauseRecord() {
-//}
-//
-//void CameraRecord::ResumeRecord() {
-//}
 
 cv::Mat CameraRecord::HandleFrame(cv::Mat frame) {
     int border_v = 0;
@@ -36,10 +29,9 @@ cv::Mat CameraRecord::HandleFrame(cv::Mat frame) {
     return frame;
 }
 
-
 void CameraRecord::run() {
     InitialCore();
-    while (t1) {
+    while (m_statue) {
         if (!m_frame.empty()) {
             if (!m_pause) {
                 cv::Mat frame = HandleFrame(m_frame);
