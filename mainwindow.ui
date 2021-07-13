@@ -28,221 +28,113 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="font">
-       <font>
-        <family>Leelawadee UI</family>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QTabWidget::pane {
-border:none;
-border-top:3px solid #4a89dc;
-background:transparent;
-}
-QTabWidget::tab-bar {
-border:none;
-}
-QTabBar::tab {
-border: none;
-border-top-left-radius: 4px;
-border-top-right-radius: 4px;
-color: rgb(0, 0, 0);
-background: rgb(255, 255, 255, 255);
-height: 28px;
-min-width: 85px;
-margin-right: 5px;
-padding-left: 5px;
-padding-right: 5px;
-}
-QTabBar::tab:hover {
-background: #5d9cec;
-}
-QTabBar::tab:selected {
-color: white;
-background: #4a89dc;
-}
-</string>
-      </property>
-      <property name="currentIndex">
-       <number>1</number>
-      </property>
-      <widget class="QWidget" name="udp">
-       <attribute name="title">
-        <string>UDP</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_9">
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_8">
-          <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="QLabel" name="label_13">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>在线设备：</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="list"/>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="2">
-           <layout class="QGridLayout" name="gridLayout_7">
-            <item row="0" column="0">
-             <widget class="QGroupBox" name="groupBox">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="title">
-               <string>设备网络参数</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_2">
-               <item row="0" column="0">
-                <layout class="QVBoxLayout" name="verticalLayout_4">
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_3">
-                   <property name="spacing">
-                    <number>8</number>
-                   </property>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_9">
-                     <item>
-                      <widget class="QLabel" name="device_ip">
-                       <property name="font">
-                        <font>
-                         <family>Candara
-                                                                                                 </family>
-                         <pointsize>15</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_13">
-                     <item>
-                      <widget class="QLabel" name="label_20">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>MAC</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="device_mac">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_11">
-                     <item>
-                      <widget class="QLabel" name="label_19">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>网关</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="device_gateway">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_10">
-                     <item>
-                      <widget class="QLabel" name="label_16">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>掩码长度</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="mask">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="do_refresh">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
+     <layout class="QGridLayout" name="gridLayout_12">
+      <item row="0" column="2">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>图像预览</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="1" column="2">
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="0">
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="frame">
+             <property name="pixmap">
+              <pixmap resource="image.qrc">:/image/res/no_signal.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="1">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>录制</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QPushButton" name="start_btn">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
 border-radius:2px;
 background-color:white;
 padding-top:5px;
@@ -265,170 +157,29 @@ background-color:gray;
 color:lightgray;
 }
 </string>
-                   </property>
-                   <property name="text">
-                    <string>刷新设备</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QGroupBox" name="groupBox_2">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="title">
-               <string>本机网络参数</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_3">
-               <item row="0" column="0">
-                <layout class="QVBoxLayout" name="verticalLayout_5">
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_6">
-                   <property name="spacing">
-                    <number>8</number>
-                   </property>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_14">
-                     <item>
-                      <widget class="QLabel" name="label_15">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>IP</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="local_ip">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_15">
-                     <item>
-                      <widget class="QLabel" name="label_21">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>MAC</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="local_mac">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_16">
-                     <item>
-                      <widget class="QLabel" name="label_22">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>网关</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="local_gateway">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_17">
-                     <item>
-                      <widget class="QLabel" name="label_17">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>掩码</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="local_mask">
-                       <property name="font">
-                        <font>
-                         <family>Microsoft YaHei UI</family>
-                         <pointsize>10</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>NaN</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="local_refresh">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
+               </property>
+               <property name="text">
+                <string>开始</string>
+               </property>
+               <property name="icon">
+                <iconset resource="image.qrc">
+                 <normaloff>:/image/res/start.png</normaloff>:/image/res/start.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pause_btn">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
 border-radius:2px;
 background-color:white;
 padding-top:5px;
@@ -451,187 +202,29 @@ background-color:gray;
 color:lightgray;
 }
 </string>
-                   </property>
-                   <property name="text">
-                    <string>重新获取</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QGroupBox" name="groupBox_3">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="title">
-               <string>本机网络参数设定</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_4">
-               <item row="0" column="0">
-                <layout class="QVBoxLayout" name="verticalLayout">
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout">
-                   <item>
-                    <widget class="QRadioButton" name="lan">
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>局域网</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="direct">
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>设备直连</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_5">
-                   <item>
-                    <widget class="QLabel" name="label">
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>IP</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Minimum</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="ip_input">
-                     <property name="maxLength">
-                      <number>15</number>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_6">
-                   <item>
-                    <widget class="QLabel" name="label_2">
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>网关</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_2">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Minimum</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>28</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="gateway_input"/>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_2">
-                   <item>
-                    <widget class="QLabel" name="label_3">
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>掩码</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_3">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Minimum</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>28</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="mask_input">
-                     <property name="maxLength">
-                      <number>15</number>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="apply">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
+               </property>
+               <property name="text">
+                <string>暂停</string>
+               </property>
+               <property name="icon">
+                <iconset resource="image.qrc">
+                 <normaloff>:/image/res/pause.png</normaloff>:/image/res/pause.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="stop_btn">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
 border-radius:2px;
 background-color:white;
 padding-top:5px;
@@ -654,558 +247,316 @@ background-color:gray;
 color:lightgray;
 }
 </string>
-                   </property>
-                   <property name="text">
-                    <string>应用</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer_7">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>5</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+               </property>
+               <property name="text">
+                <string>停止</string>
+               </property>
+               <property name="icon">
+                <iconset resource="image.qrc">
+                 <normaloff>:/image/res/stop.png</normaloff>:/image/res/stop.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="rotate_btn">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+QPushButton:disabled {
+background-color:gray;
+color:lightgray;
+}
+</string>
+               </property>
+               <property name="text">
+                <string>翻转</string>
+               </property>
+               <property name="icon">
+                <iconset resource="image.qrc">
+                 <normaloff>:/image/res/rotate.png</normaloff>:/image/res/rotate.png</iconset>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="uvc">
-       <attribute name="title">
-        <string>UVC</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_13">
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_12">
-          <item row="0" column="2">
-           <layout class="QGridLayout" name="gridLayout_6">
-            <item row="2" column="0">
-             <widget class="QGroupBox" name="groupBox_5">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="title">
-               <string>录制</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_5">
-               <item row="0" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                 <item>
-                  <widget class="QPushButton" name="start_btn">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
-border-radius:2px;
-background-color:white;
-padding-top:5px;
-padding-bottom:5px;
-color:white;
-background-color:#4a89dc;
-}
-
-QPushButton:hover {
-background-color:#5d9cec;
-color:white;
-}
-
-QPushButton:pressed {
-background-color:#4a89dc;
-}
-
-QPushButton:disabled {
-background-color:gray;
-color:lightgray;
-}
-</string>
-                   </property>
-                   <property name="text">
-                    <string>开始</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="image.qrc">
-                     <normaloff>:/image/res/start.png</normaloff>:/image/res/start.png</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pause_btn">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
-border-radius:2px;
-background-color:white;
-padding-top:5px;
-padding-bottom:5px;
-color:white;
-background-color:#4a89dc;
-}
-
-QPushButton:hover {
-background-color:#5d9cec;
-color:white;
-}
-
-QPushButton:pressed {
-background-color:#4a89dc;
-}
-
-QPushButton:disabled {
-background-color:gray;
-color:lightgray;
-}
-</string>
-                   </property>
-                   <property name="text">
-                    <string>暂停</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="image.qrc">
-                     <normaloff>:/image/res/pause.png</normaloff>:/image/res/pause.png</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="stop_btn">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
-border-radius:2px;
-background-color:white;
-padding-top:5px;
-padding-bottom:5px;
-color:white;
-background-color:#4a89dc;
-}
-
-QPushButton:hover {
-background-color:#5d9cec;
-color:white;
-}
-
-QPushButton:pressed {
-background-color:#4a89dc;
-}
-
-QPushButton:disabled {
-background-color:gray;
-color:lightgray;
-}
-</string>
-                   </property>
-                   <property name="text">
-                    <string>停止</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="image.qrc">
-                     <normaloff>:/image/res/stop.png</normaloff>:/image/res/stop.png</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="rotate_btn">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>10</pointsize>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{
-border-radius:2px;
-background-color:white;
-padding-top:5px;
-padding-bottom:5px;
-color:white;
-background-color:#4a89dc;
-}
-
-QPushButton:hover {
-background-color:#5d9cec;
-color:white;
-}
-
-QPushButton:pressed {
-background-color:#4a89dc;
-}
-
-QPushButton:disabled {
-background-color:gray;
-color:lightgray;
-}
-</string>
-                   </property>
-                   <property name="text">
-                    <string>翻转</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="image.qrc">
-                     <normaloff>:/image/res/rotate.png</normaloff>:/image/res/rotate.png</iconset>
-                   </property>
-                   <property name="checkable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QGroupBox" name="groupBox_4">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="title">
-               <string>图像预览</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_11">
-               <item row="1" column="0">
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+      </item>
+      <item row="0" column="1">
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>13</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>在线设备：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="uvc_list">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <stylestrategy>PreferAntialias</stylestrategy>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>设备详情</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <item>
+              <widget class="QLabel" name="uvc_des">
+               <property name="font">
+                <font>
+                 <family>Candara</family>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>NaN</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Minimum</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>13</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>参数1：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_1">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>NaN</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>参数2：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_2">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>NaN</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>参数3：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_3">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>NaN</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>参数4：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_4">
+               <property name="font">
+                <font>
+                 <family>Microsoft YaHei UI</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>NaN</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QPushButton" name="do_uvc_refresh">
+                 <property name="font">
+                  <font>
+                   <family>Microsoft YaHei UI</family>
+                   <pointsize>10</pointsize>
+                  </font>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton{
+border-radius:2px;
+background-color:white;
+padding-top:5px;
+padding-bottom:5px;
+color:white;
+background-color:#4a89dc;
+}
+
+QPushButton:hover {
+background-color:#5d9cec;
+color:white;
+}
+
+QPushButton:pressed {
+background-color:#4a89dc;
+}
+
+</string>
                  </property>
-                </spacer>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="frame">
-                 <property name="pixmap">
-                  <pixmap resource="image.qrc">:/image/res/no_signal.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
+                 <property name="text">
+                  <string>刷新列表</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <spacer name="verticalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item>
+                <widget class="QPushButton" name="open_btn">
+                 <property name="enabled">
+                  <bool>true</bool>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
+                 <property name="font">
+                  <font>
+                   <family>Microsoft YaHei UI</family>
+                   <pointsize>10</pointsize>
+                  </font>
                  </property>
-                </spacer>
-               </item>
-               <item row="1" column="2">
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="1">
-                <spacer name="verticalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_11">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>在线设备：</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="uvc_list">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-                <stylestrategy>PreferAntialias</stylestrategy>
-               </font>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_6">
-              <property name="font">
-               <font>
-                <family>Microsoft YaHei UI</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="title">
-               <string>设备详情</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_10">
-               <item row="0" column="0">
-                <layout class="QVBoxLayout" name="verticalLayout_10">
-                 <item>
-                  <widget class="QLabel" name="uvc_des">
-                   <property name="font">
-                    <font>
-                     <family>Candara</family>
-                     <pointsize>20</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>NaN</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="verticalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Minimum</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>13</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_8">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>9</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>参数1：</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="p_1">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>NaN</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_9">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>9</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>参数2：</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="p_2">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>NaN</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_10">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>9</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>参数3：</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="p_3">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>NaN</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_11">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                     <pointsize>9</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>参数4：</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="p_4">
-                   <property name="font">
-                    <font>
-                     <family>Microsoft YaHei UI</family>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>NaN</string>
-                   </property>
-                   <property name="wordWrap">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_7">
-                   <item>
-                    <widget class="QPushButton" name="do_uvc_refresh">
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                       <pointsize>10</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton{
-border-radius:2px;
-background-color:white;
-padding-top:5px;
-padding-bottom:5px;
-color:white;
-background-color:#4a89dc;
-}
-
-QPushButton:hover {
-background-color:#5d9cec;
-color:white;
-}
-
-QPushButton:pressed {
-background-color:#4a89dc;
-}
-
-</string>
-                     </property>
-                     <property name="text">
-                      <string>刷新列表</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="open_btn">
-                     <property name="enabled">
-                      <bool>true</bool>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                       <pointsize>10</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton{
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton{
 border-radius:2px;
 background-color:white;
 padding-top:5px;
@@ -1228,25 +579,25 @@ background-color:gray;
 color:lightgray;
 }
 </string>
-                     </property>
-                     <property name="text">
-                      <string>打开设备</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="close_btn">
-                     <property name="enabled">
-                      <bool>false</bool>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Microsoft YaHei UI</family>
-                       <pointsize>10</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton{
+                 </property>
+                 <property name="text">
+                  <string>打开设备</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="close_btn">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Microsoft YaHei UI</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton{
 border-radius:2px;
 background-color:white;
 padding-top:5px;
@@ -1269,42 +620,22 @@ background-color:gray;
 color:lightgray;
 }
 </string>
-                     </property>
-                     <property name="text">
-                      <string>关闭设备</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
+                 </property>
+                 <property name="text">
+                  <string>关闭设备</string>
+                 </property>
+                </widget>
                </item>
               </layout>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>5</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
-      </widget>
-     </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

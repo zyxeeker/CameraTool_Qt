@@ -23,15 +23,7 @@ public:
 
     void RefreshUVCDeviceList();
 
-    void RefreshDeviceList();
-
-    void DeviceDetail();
-
     void UVCDeviceDetail();
-
-    void GetLocalDetail();
-
-    void SetLocal();
 
     ~MainWindow();
 
@@ -43,11 +35,8 @@ private:
     CameraDetect m_detectService;
     CameraCore m_cameraCore;
     CameraRecord *m_cameraRecord;
-    QMap<QString, Dev::NetDevice> m_netDevices;
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
 
-    Dev::Localhost m_localhost;
-    Dev::NetDevice m_curNetDevice;
     Dev::UVCDevice m_curUVCDevice;
 
 private slots:
