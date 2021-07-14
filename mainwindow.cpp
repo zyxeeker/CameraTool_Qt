@@ -9,7 +9,14 @@ void MainWindow::Display(cv::Mat frame) {
     cv::Mat tmp;
     QImage Img;
     cv::cvtColor(frame, tmp, CV_RGB2BGR);
-    Img = QImage((const uchar*)(tmp.data), tmp.cols, tmp.rows, tmp.cols*frame.channels(), QImage::Format_RGB888);
+    Img = QImage((const uchar *) (tmp.data), tmp.cols, tmp.rows, tmp.cols * frame.channels(), QImage::Format_RGB888);
+    if (mX != -1 || mY != -1) {
+        QColor tpp = Img.pixel(mX, mY);
+        ui->statusbar->showMessage(
+                "当前鼠标点的像素值为：rgb(" + QString::number(tpp.red()) + "," + QString::number(tpp.green()) + "," +
+                QString::number(tpp.blue()) + ")");
+    }
+
     ui->frame->setPixmap(QPixmap::fromImage(Img));
 }
 
@@ -22,11 +29,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     RefreshUVCDeviceList();
 
-    connect(&m_cameraCore, SIGNAL(SendFrame(cv::Mat)),this, SLOT(Display(cv::Mat)));
+    connect(&m_cameraCore, SIGNAL(SendFrame(cv::Mat)), this, SLOT(Display(cv::Mat)));
     connect(this, SIGNAL(SendStatue(bool)), &m_cameraCore, SLOT(SetPreviewStatue(bool)));
     connect(this, SIGNAL(SetRecordStatue(bool)), &m_cameraCore, SLOT(_SetRecordStatue(bool)));
     connect(&m_cameraCore, SIGNAL(SendFrame2Record(cv::Mat)), m_cameraRecord, SLOT(GetFrame(cv::Mat)));
     connect(this, SIGNAL(SetRotateStatue(bool)), &m_cameraCore, SLOT(SetRotateFrame(bool)));
+
+    connect(ui->frame, &MouseTrackLabel::clicked, this, [=](QMouseEvent *ev) {
+        QPoint tmp = ev->pos();
+        QImage img = ui->frame->pixmap()->toImage();
+
+
+        mX = tmp.x();
+        mY = tmp.y();
+    });
 
     connect(ui->do_uvc_refresh, &QPushButton::clicked, this, [=]() {
         RefreshUVCDeviceList();
@@ -34,9 +50,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->uvc_list, &QListWidget::itemClicked, this, [=]() {
         UVCDeviceDetail();
     });
-    connect(ui->open_btn, &QPushButton::clicked, this, [=](){
+    connect(ui->open_btn, &QPushButton::clicked, this, [=]() {
         if (m_cameraCore.isRunning())
-            emit SendStatue(true);
+                emit SendStatue(true);
         else
             m_cameraCore.start();
         ui->open_btn->setEnabled(false);

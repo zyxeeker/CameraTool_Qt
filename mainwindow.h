@@ -38,10 +38,15 @@ private:
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
 
     Dev::UVCDevice m_curUVCDevice;
+    int mX = -1;
+    int mY = -1;
 
 private slots:
+
     void Display(cv::Mat frame);
+
 signals:
+
     void SendStatue(bool statue);
 
     void SetRecordStatue(bool mark);
