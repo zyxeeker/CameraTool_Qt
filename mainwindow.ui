@@ -70,7 +70,7 @@
             </spacer>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="frame">
+            <widget class="MouseTrackLabel" name="frame">
              <property name="pixmap">
               <pixmap resource="image.qrc">:/image/res/no_signal.png</pixmap>
              </property>
@@ -693,6 +693,13 @@ color:lightgray;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MouseTrackLabel</class>
+   <extends>QLabel</extends>
+   <header>component/mouse_track_label.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="image.qrc"/>
   <include location="image.qrc"/>
