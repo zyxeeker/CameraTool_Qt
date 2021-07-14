@@ -10,6 +10,7 @@
 #include "param.h"
 #include "logger/logger.h"
 #include "opencv2/opencv.hpp"
+#define FRAME_TEST 0
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -38,8 +39,14 @@ private:
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
 
     Dev::UVCDevice m_curUVCDevice;
-    int mX = -1;
-    int mY = -1;
+    int m_X = -1;
+    int m_Y = -1;
+#if FRAME_TEST
+    double m_XTmp = 0;
+    double m_YTmp = 0;
+#endif
+    int m_LastX = -1;
+    int m_LastY = -1;
 
 private slots:
 

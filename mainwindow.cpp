@@ -2,22 +2,59 @@
 #include "./ui_mainwindow.h"
 #include <QMessageBox>
 #include <QProcess>
+#include <QPainter>
 
 void MainWindow::Display(cv::Mat frame) {
 //    if (!frame.empty())
 //        ui->close_btn->setEnabled(true);
-    cv::Mat tmp;
-    QImage Img;
+    cv::Mat tmp, tmp_copy;
+    QImage Img, Img_copy;
+    double x;
+    double y;
+
     cv::cvtColor(frame, tmp, CV_RGB2BGR);
     Img = QImage((const uchar *) (tmp.data), tmp.cols, tmp.rows, tmp.cols * frame.channels(), QImage::Format_RGB888);
-    if (mX != -1 || mY != -1) {
-        QColor tpp = Img.pixel(mX, mY);
-        ui->statusbar->showMessage(
-                "当前鼠标点的像素值为：rgb(" + QString::number(tpp.red()) + "," + QString::number(tpp.green()) + "," +
-                QString::number(tpp.blue()) + ")");
-    }
 
-    ui->frame->setPixmap(QPixmap::fromImage(Img));
+    if (m_X != -1 || m_Y != -1) {
+        tmp_copy = tmp.clone();
+#if FRAME_TEST
+        if (m_XTmp != m_X || m_YTmp != m_Y){
+            m_XTmp = m_X;
+            m_YTmp = m_Y;
+#endif
+        double w = double(tmp.cols) / double(ui->frame->width());
+        double h = double(tmp.rows) / double(ui->frame->height());
+
+        x = w * m_X;
+        y = h * m_Y;
+#if FRAME_TEST
+        }
+#endif
+        if (x >= tmp_copy.cols || y >= tmp_copy.rows) {
+            x = m_LastX;
+            y = m_LastY;
+        } else {
+            m_LastX = x;
+            m_LastY = y;
+        }
+
+        cv::line(tmp_copy, cv::Point(x - 10 / 2, y), cvPoint(x + 10 / 2, y), CV_RGB(0, 255, 255), 2, 8, 0);
+        //绘制竖线
+        cv::line(tmp_copy, cvPoint(x, y - 10 / 2), cvPoint(x, y + 10 / 2), CV_RGB(0, 255, 255), 2, 8, 0);
+
+        int R = tmp.at<cv::Vec3b>(y, x)[0];
+        int G = tmp.at<cv::Vec3b>(y, x)[1];
+        int B = tmp.at<cv::Vec3b>(y, x)[2];
+
+        Img_copy = QImage((const uchar *) (tmp_copy.data), tmp_copy.cols, tmp_copy.rows,
+                          tmp_copy.cols * frame.channels(), QImage::Format_RGB888);
+        ui->frame->setPixmap(QPixmap::fromImage(Img_copy));
+        ui->statusbar->showMessage(
+                "当前鼠标点的像素值为：rgb(" + QString::number(R) + "," + QString::number(G) + "," +
+                QString::number(B) + ")");
+    } else {
+        ui->frame->setPixmap(QPixmap::fromImage(Img));
+    }
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -37,11 +74,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(ui->frame, &MouseTrackLabel::clicked, this, [=](QMouseEvent *ev) {
         QPoint tmp = ev->pos();
-        QImage img = ui->frame->pixmap()->toImage();
-
-
-        mX = tmp.x();
-        mY = tmp.y();
+        m_X = tmp.x();
+        m_Y = tmp.y();
     });
 
     connect(ui->do_uvc_refresh, &QPushButton::clicked, this, [=]() {
