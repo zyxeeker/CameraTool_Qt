@@ -12,11 +12,7 @@
 class CameraCore : public QThread {
     Q_OBJECT
 public:
-    ~CameraCore() {
-#if 1
-        std::cout<<"Thread Destroyed!"<<std::endl;
-#endif
-        m_cap.release(); }
+    ~CameraCore() { m_cap.release(); }
 
     bool OpenCamera();
 

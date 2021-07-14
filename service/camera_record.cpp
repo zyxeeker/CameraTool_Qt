@@ -2,14 +2,16 @@
 // Created by zyx on 2021/7/9.
 //
 
+#include <logger/logger.h>
 #include "camera_record.h"
 
 bool CameraRecord::InitialCore() {
     m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capWidth, m_capHeight), true);
     if (!m_vOut.isOpened()) {
-        std::cout << "Recorder Fail!" << std::endl;
+        LOG::logger(LOG::LogLevel::FATAL, "Recorder fail to open file!");
         return false;
     }
+    LOG::logger(LOG::LogLevel::INFO, "Recorder success to open file!");
     return true;
 }
 
@@ -42,4 +44,5 @@ void CameraRecord::run() {
         }
     }
     m_vOut.release();
+    LOG::logger(LOG::LogLevel::INFO, "Saved file!");
 }

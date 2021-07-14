@@ -3,12 +3,12 @@
 //
 
 #include "camera_core.h"
-#include <iostream>
+#include "./logger/logger.h"
 
 bool CameraCore::OpenCamera() {
     m_cap.open(0, cv::CAP_DSHOW);
     if (!m_cap.isOpened()) {
-        std::cout << "could not open the VideoCapture !" << std::endl;
+        LOG::logger(LOG::LogLevel::WARN, "Could not open the VideoCapture!");
         return false;
     }
     m_cap.set(cv::CAP_PROP_FRAME_HEIGHT, 680);
@@ -35,5 +35,6 @@ void CameraCore::CameraPreview() {
 void CameraCore::run() {
     if (OpenCamera()) {
         CameraPreview();
+        LOG::logger(LOG::LogLevel::INFO, "CameraCore service is running!");
     }
 }

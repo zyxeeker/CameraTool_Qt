@@ -3,14 +3,11 @@
 
 #include <QTcpSocket>
 #include <QUdpSocket>
-#include <QDebug>
 #include <QCameraInfo>
 #include "param.h"
 
 class CameraDetect {
 public:
-    CameraDetect();
-
     void find_uvc_devices();
 
     QMap<QString, Dev::UVCDevice> getUVCDevices() const { return m_uvcDeviceList; }

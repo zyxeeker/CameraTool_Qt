@@ -43,6 +43,7 @@ private slots:
     void Display(cv::Mat frame);
 signals:
     void SendStatue(bool statue);
+
     void SetRecordStatue(bool mark);
 
     void SetRotateStatue(bool rt);

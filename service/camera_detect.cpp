@@ -1,16 +1,10 @@
 #include "camera_detect.h"
 #include "logger/logger.h"
-#include <WinSock2.h>
-#pragma comment(lib,"ws2_32.lib")
-
-
-CameraDetect::CameraDetect() {
-    find_uvc_devices();
-}
 
 void CameraDetect::find_uvc_devices() {
     QList<QCameraInfo> uvcDevices = QCameraInfo::availableCameras();
     if (!uvcDevices.isEmpty()) {
+        LOG::logger(LOG::LogLevel::INFO, "Found " + QString(uvcDevices.size()) + " online devices", true);
                 foreach (QCameraInfo item, uvcDevices) {
                 QString detailTmp = item.deviceName();
                 QStringList detail = detailTmp.split('#');
@@ -23,9 +17,12 @@ void CameraDetect::find_uvc_devices() {
 
                 m_uvcDeviceList[m_uvcDevice.des] = m_uvcDevice;
 
-                qDebug() << detail;
-                qDebug() << item.deviceName();
-                qDebug() << item.description();
+                LOG::logger(LOG::LogLevel::INFO, "Online device`s detail: "
+                                                 "(p1): " + m_uvcDevice.p1 +
+                                                 ", (p2): " + m_uvcDevice.p2 +
+                                                 ", (p3): " + m_uvcDevice.p3 +
+                                                 ", (p4): " + m_uvcDevice.p4 +
+                                                 ", (des): " + m_uvcDevice.des, true);
             }
     }
 }

@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <QDebug>
-#include <QHostInfo>
 #include <QMessageBox>
 #include <QProcess>
 
@@ -94,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 void MainWindow::UVCDeviceDetail() {
     QListWidgetItem *item = ui->uvc_list->currentItem();
     m_curUVCDevice = m_uvcDevices[item->text()];
+    LOG::logger(LOG::LogLevel::INFO, "User selected device: " + item->text(), true);
 
     ui->uvc_des->setText(m_curUVCDevice.des);
     ui->p_1->setText(m_curUVCDevice.p1);
@@ -109,7 +108,6 @@ void MainWindow::RefreshUVCDeviceList() {
 
     for (auto item : m_uvcDevices)
         ui->uvc_list->addItem(item.des);
-
 }
 
 MainWindow::~MainWindow() {
