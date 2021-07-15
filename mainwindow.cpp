@@ -57,10 +57,16 @@ void MainWindow::Display(cv::Mat frame) {
     }
 }
 
+void MainWindow::on_exposure_value_valueChanged() {
+    int value = ui->exposure_value->value();
+    ui->exposure_label->setText(QString::number(value));
+    m_cameraCore.SetExposure(value);
+}
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    m_cameraRecord = new CameraRecord(640, 640, 30.0);
+    m_cameraRecord = new CameraRecord(700, 700, 30.0);
 
     qRegisterMetaType<cv::Mat>("cv::Mat");
 
@@ -89,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                 emit SendStatue(true);
         else
             m_cameraCore.start();
+        ui->exposure_box->setEnabled(true);
         ui->open_btn->setEnabled(false);
         ui->close_btn->setEnabled(true);
         ui->start_btn->setEnabled(true);
@@ -96,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     });
     connect(ui->close_btn, &QPushButton::clicked, this, [=](){
         emit SendStatue(false);
+        ui->exposure_box->setEnabled(false);
         ui->close_btn->setEnabled(false);
         ui->open_btn->setEnabled(true);
         ui->start_btn->setEnabled(false);
@@ -105,6 +113,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     });
     connect(ui->start_btn, &QPushButton::clicked, this, [=]() {
         emit SetRecordStatue(true);
+        ui->exposure_box->setEnabled(false);
         m_cameraRecord->start();
         ui->start_btn->setEnabled(false);
         ui->pause_btn->setEnabled(true);
@@ -123,6 +132,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     });
     connect(ui->stop_btn, &QPushButton::clicked, this, [=](){
         emit SetRecordStatue(false);
+        ui->exposure_box->setEnabled(true);
         m_cameraRecord->StopRecord(false);
         ui->start_btn->setEnabled(true);
         ui->stop_btn->setEnabled(false);

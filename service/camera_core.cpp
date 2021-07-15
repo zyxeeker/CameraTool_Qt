@@ -11,15 +11,18 @@ bool CameraCore::OpenCamera() {
         LOG::logger(LOG::LogLevel::WARN, "Could not open the VideoCapture!");
         return false;
     }
-    m_cap.set(cv::CAP_PROP_FRAME_HEIGHT, 680);
-    m_cap.set(cv::CAP_PROP_FRAME_WIDTH, 680);
     return true;
 }
 
 void CameraCore::CameraPreview() {
     cv::Mat frame;
+    int exposure_tmp = -1;
     while(true) {
         if (m_previewStatue) {
+            if (m_exposureValue != exposure_tmp) {
+                m_cap.set(CV_CAP_PROP_EXPOSURE, m_exposureValue);
+                exposure_tmp = m_exposureValue;
+            }
             m_cap.read(frame);
             if (m_rotateStatue) {
                 cv::transpose(frame, frame);

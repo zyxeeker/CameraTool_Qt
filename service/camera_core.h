@@ -10,7 +10,7 @@
 #include <string>
 
 class CameraCore : public QThread {
-    Q_OBJECT
+Q_OBJECT
 public:
     ~CameraCore() { m_cap.release(); }
 
@@ -20,9 +20,13 @@ public:
 
     bool GetCurMark() { return m_curMark; }
 
+    void SetExposure(int ev) { m_exposureValue = ev; };
+
 protected:
     void run() override;
+
 private:
+    int m_exposureValue = 0;
     bool m_curMark = false;
     cv::VideoCapture m_cap;
     bool m_previewStatue = true;

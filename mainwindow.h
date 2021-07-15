@@ -52,6 +52,8 @@ private slots:
 
     void Display(cv::Mat frame);
 
+    void on_exposure_value_valueChanged();
+
 signals:
 
     void SendStatue(bool statue);
