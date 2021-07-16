@@ -13,6 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(OpenCV_DIR opencv341)
 
+include_directories(third/DirectShow/baseclasses)
+
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package( ...) calls below.
@@ -41,7 +43,7 @@ set(PROJECT_SOURCES
         service/camera_detect.h
         service/camera_detect.cpp
         param.h
-        logger/logger.cpp logger/logger.h service/camera_core.cpp service/camera_core.h service/camera_record.cpp service/camera_record.h component/mouse_track_label.cpp component/mouse_track_label.h)
+        logger/logger.cpp logger/logger.h service/camera_core.cpp service/camera_core.h service/camera_record.cpp service/camera_record.h component/mouse_track_label.cpp component/mouse_track_label.h service/UVC_dshow.cpp service/UVC_dshow.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(test
@@ -65,6 +67,7 @@ target_link_libraries(test PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(test LINK_PUBLIC Qt${QT_VERSION_MAJOR}::Network)
 target_link_libraries(test LINK_PUBLIC Qt${QT_VERSION_MAJOR}::Multimedia)
 target_link_libraries(test LINK_PUBLIC ${OpenCV_LIBS})
+target_link_libraries(test LINK_PUBLIC strmiids.lib)
 
 
 set_target_properties(test PROPERTIES
