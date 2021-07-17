@@ -23,6 +23,7 @@ void CameraCore::CameraPreview() {
                 m_cap.set(CV_CAP_PROP_EXPOSURE, m_exposureValue);
                 exposure_tmp = m_exposureValue;
             }
+            m_cap.set(CV_CAP_PROP_BRIGHTNESS, 100);
             m_cap.read(frame);
             if (m_rotateStatue) {
                 cv::transpose(frame, frame);

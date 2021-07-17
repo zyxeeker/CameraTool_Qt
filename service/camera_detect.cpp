@@ -10,9 +10,9 @@ void CameraDetect::find_uvc_devices() {
                 QStringList detail = detailTmp.split('#');
 
                 m_uvcDevice.p1 = detail[0];
-                m_uvcDevice.p2 = detail[1];
-                m_uvcDevice.p3 = detail[2];
-                m_uvcDevice.p4 = detail[3];
+                m_uvcDevice.p2 = detail[0];
+                m_uvcDevice.p3 = detail[0];
+                m_uvcDevice.p4 = detail[0];
                 m_uvcDevice.des = item.description();
 
                 m_uvcDeviceList[m_uvcDevice.des] = m_uvcDevice;

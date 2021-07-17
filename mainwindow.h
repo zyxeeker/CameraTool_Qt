@@ -10,7 +10,11 @@
 #include "param.h"
 #include "logger/logger.h"
 #include "opencv2/opencv.hpp"
+#include "service/UVC_dshow.h"
+
 #define FRAME_TEST 0
+#define USE_OPENCV 0
+#define USE_DSHOW 1
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,8 +40,9 @@ private:
     CameraDetect m_detectService;
     CameraCore m_cameraCore;
     CameraRecord *m_cameraRecord;
+    UVCCameraLibrary m_lib;
     QMap<QString, Dev::UVCDevice> m_uvcDevices;
-
+    QString m_selectedDeivce;
     Dev::UVCDevice m_curUVCDevice;
     int m_X = -1;
     int m_Y = -1;

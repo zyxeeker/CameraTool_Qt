@@ -60,7 +60,12 @@ void MainWindow::Display(cv::Mat frame) {
 void MainWindow::on_exposure_value_valueChanged() {
     int value = ui->exposure_value->value();
     ui->exposure_label->setText(QString::number(value));
+#if USE_DSHOW
+    m_lib.SetExposure(value);
+#endif
+#if USE_OPENCV
     m_cameraCore.SetExposure(value);
+#endif
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -95,11 +100,25 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                 emit SendStatue(true);
         else
             m_cameraCore.start();
-        ui->exposure_box->setEnabled(true);
         ui->open_btn->setEnabled(false);
         ui->close_btn->setEnabled(true);
         ui->start_btn->setEnabled(true);
         ui->rotate_btn->setEnabled(true);
+#if USE_OPENCV
+        ui->exposure_box->setEnabled(true);
+#endif
+#if USE_DSHOW
+        if (SUCCEEDED(m_lib.ConnectDevice(m_selectedDeivce.toLatin1().data()))) {
+            if (SUCCEEDED(m_lib.GetExposure())) {
+                ui->exposure_box->setEnabled(true);
+                std::map<std::string, int> ExTmp = m_lib.GetVal();
+                ui->exposure_value->setMaximum(ExTmp["max"]);
+                ui->exposure_value->setMinimum(ExTmp["min"]);
+                ui->exposure_value->setValue(ExTmp["cur"]);
+                ui->exposure_label->setText(QString::number(ExTmp["cur"]));
+            }
+        }
+#endif
     });
     connect(ui->close_btn, &QPushButton::clicked, this, [=](){
         emit SendStatue(false);
@@ -138,7 +157,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->stop_btn->setEnabled(false);
         ui->pause_btn->setEnabled(false);
         ui->close_btn->setEnabled(true);
-
     });
     connect(ui->rotate_btn, &QPushButton::clicked, this, [=]() {
         if (ui->rotate_btn->isChecked())
@@ -151,9 +169,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 void MainWindow::UVCDeviceDetail() {
     QListWidgetItem *item = ui->uvc_list->currentItem();
+    m_selectedDeivce = item->text();
     m_curUVCDevice = m_uvcDevices[item->text()];
     LOG::logger(LOG::LogLevel::INFO, "User selected device: " + item->text(), true);
-
+    ui->open_btn->setEnabled(true);
     ui->uvc_des->setText(m_curUVCDevice.des);
     ui->p_1->setText(m_curUVCDevice.p1);
     ui->p_2->setText(m_curUVCDevice.p2);
