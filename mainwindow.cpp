@@ -38,9 +38,9 @@ void MainWindow::Display(cv::Mat frame) {
             m_LastY = y;
         }
 
-        cv::line(tmp_copy, cv::Point(x - 10 / 2, y), cvPoint(x + 10 / 2, y), CV_RGB(0, 255, 255), 2, 8, 0);
+        cv::line(tmp_copy, cv::Point(x - 10 / 2, y), cv::Point(x + 10 / 2, y), CV_RGB(0, 255, 255), 2, 8, 0);
         //绘制竖线
-        cv::line(tmp_copy, cvPoint(x, y - 10 / 2), cvPoint(x, y + 10 / 2), CV_RGB(0, 255, 255), 2, 8, 0);
+        cv::line(tmp_copy, cv::Point(x, y - 10 / 2), cv::Point(x, y + 10 / 2), CV_RGB(0, 255, 255), 2, 8, 0);
 
         int R = tmp.at<cv::Vec3b>(y, x)[0];
         int G = tmp.at<cv::Vec3b>(y, x)[1];
