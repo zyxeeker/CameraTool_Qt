@@ -14,6 +14,11 @@ UVCCameraLibrary::~UVCCameraLibrary() {
         m_EnumMoniker->Release();
     if (m_CreateDevEnum != nullptr)
         m_CreateDevEnum->Release();
+    if (m_camera_control != nullptr)
+        m_camera_control->Release();
+    if (m_video_proc != nullptr)
+        m_video_proc->Release();
+
     CoUninitialize();
 }
 
@@ -56,7 +61,7 @@ void UVCCameraLibrary::ListDevices(char **cameraNames, int &nDevices) {
         }
         strcpy_s(cameraRealNames[nDevices], devname);
         if (nSameNamedDevices > 0)
-            std::cout << "Camera name: " << devname << std::endl;
+            LOG::logger(LOG::LogLevel::INFO, "Camera name:" + std::string(devname));
         strcpy_s(cameraNames[nDevices], sizeof(devname), (TCHAR *) devname);
 
         pMoniker->Release();
@@ -111,7 +116,7 @@ bool UVCCameraLibrary::ConnectDevice(char *deviceName) {
         strcpy_s(cameraRealNames[nDevices], devname);
 
         if (nSameNamedDevices > 0)
-            std::cout << "Camera name: " << devname << std::endl;
+            LOG::logger(LOG::LogLevel::INFO, "Camera name:" + std::string(devname));
         if (strcmp(devname, deviceName) == 0) {
             m_Moniker->BindToObject(0, 0, IID_IBaseFilter,
                                     (void **) &m_DeviceFilter);
@@ -136,40 +141,63 @@ void UVCCameraLibrary::DisconnectDevice() {
 
 HRESULT UVCCameraLibrary::GetExposure() {
     HRESULT hr;
-    IAMCameraControl *pCameraControl = 0;
-    hr = m_DeviceFilter->QueryInterface(IID_IAMCameraControl, (void **) &pCameraControl);
-    if (FAILED(hr))
-        std::cout << "This device does not support IAMCameraControl" << std::endl;
-    else {
-        long Min, Max, Step, Default, Flags, Val;
-        hr = pCameraControl->GetRange(CameraControl_Exposure, &Min, &Max, &Step, &Default, &Flags);
-        hr = pCameraControl->Get(CameraControl_Exposure, &Val, &Flags);
-        std::cout << "Min:" << Min << ";Max:" << Max << ";Step:" << Step << std::endl;
-        std::cout << "Val:" << Val << std::endl;
-        if (SUCCEEDED(hr)) {
-            m_vals["max"] = Max;
-            m_vals["cur"] = Val;
-            m_vals["min"] = Min;
-        } else {
-            std::cout << "This device does not support PTZControl" << std::endl;
+    if(m_camera_control == 0){
+        hr = m_DeviceFilter->QueryInterface(IID_IAMCameraControl, (void **) &m_camera_control);
+        if (FAILED(hr)){
+            LOG::logger(LOG::LogLevel::WARN, "This device does not support IAMCameraControl");
+            return hr;
         }
     }
-    if (pCameraControl != nullptr)
-        pCameraControl->Release();
+
+    long Min, Max, Step, Default, Flags, Val;
+    hr = m_camera_control->GetRange(CameraControl_Exposure, &Min, &Max, &Step, &Default, &Flags);
+    hr = m_camera_control->Get(CameraControl_Exposure, &Val, &Flags);
+    LOG::logger(LOG::LogLevel::INFO, "Exposure: Min:" + std::to_string(Min) + ";Max:" + std::to_string(Max) + ";Step:" + std::to_string(Step));
+    LOG::logger(LOG::LogLevel::INFO, "Exposure: Current Val:" + std::to_string(Val));
+    if (SUCCEEDED(hr)) {
+        m_exposure_vals["max"] = Max;
+        m_exposure_vals["cur"] = Val;
+        m_exposure_vals["min"] = Min;
+    } else {
+        LOG::logger(LOG::LogLevel::WARN, "This device does not support PTZControl");
+    }
+
     return hr;
 }
 
 HRESULT UVCCameraLibrary::SetExposure(int Val) {
     HRESULT hr;
-    IAMCameraControl *pCameraControl = 0;
-    hr = m_DeviceFilter->QueryInterface(IID_IAMCameraControl, (void **) &pCameraControl);
-    if (FAILED(hr))
-        std::cout << "This device does not support IAMCameraControl" << std::endl;
+    if(m_camera_control == 0){
+        LOG::logger(LOG::LogLevel::WARN, "Please get exposure first!");
+        return E_ABORT;
+    }
+    hr = m_camera_control->Set(CameraControl_Exposure, Val, CameraControl_Flags_Manual);
+    return hr;
+}
 
-    else
-        hr = pCameraControl->Set(CameraControl_Exposure, Val, CameraControl_Flags_Manual);
-    if (pCameraControl != nullptr)
-        pCameraControl->Release();
+// Powerline Frequency
+HRESULT UVCCameraLibrary::GetPowerLineFrequency(){
+    HRESULT hr;
+    if(m_video_proc == 0){
+        hr = m_DeviceFilter->QueryInterface(IID_IAMVideoProcAmp, (void **) &m_video_proc);
+        if (FAILED(hr)){
+            LOG::logger(LOG::LogLevel::WARN, "This device does not support IAMVideoProcAmp");
+            return hr;
+        }
+    }
+    long Flags, Val;
+    m_video_proc->Get(KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY,&Val,&Flags);
+    m_power_line_freq = Val;
+    return S_OK;
+}
+
+HRESULT UVCCameraLibrary::SetPowerLineFrequency(u_long freq_type){
+    HRESULT hr;
+    if(m_camera_control == 0){
+        LOG::logger(LOG::LogLevel::WARN, "Please get powerline frequency first!");
+        return E_ABORT;
+    }
+    hr = m_video_proc->Set(KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY, freq_type, CameraControl_Flags_Manual);
     return hr;
 }
 

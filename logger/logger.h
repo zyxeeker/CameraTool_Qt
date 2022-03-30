@@ -15,7 +15,6 @@ namespace LOG {
             DEBUG,
             INFO,
             WARN,
-            ERROR,
             FATAL
         };
 

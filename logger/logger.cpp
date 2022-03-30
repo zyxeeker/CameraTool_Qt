@@ -16,8 +16,6 @@ std::string LOG::LogLevel::toString(LogLevel::LOG_LEVEL level) {
             return "INFO";
         case WARN:
             return "WARN";
-        case ERROR:
-            return "ERROR";
         case FATAL:
             return "FATAL";
     }

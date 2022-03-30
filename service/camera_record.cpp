@@ -6,7 +6,7 @@
 #include "camera_record.h"
 
 bool CameraRecord::InitialCore() {
-    m_vOut.open("test.avi", CV_FOURCC('M', 'J', 'P', 'G'), m_fps, cv::Size(m_capWidth, m_capHeight), true);
+    m_vOut.open("test.avi", cv::CAP_OPENCV_MJPEG, m_fps, cv::Size(m_capWidth, m_capHeight), true);
     if (!m_vOut.isOpened()) {
         LOG::logger(LOG::LogLevel::FATAL, "Recorder fail to open file!");
         return false;

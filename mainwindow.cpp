@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QPainter>
+#include <QRadioButton>
 
 void MainWindow::Display(cv::Mat frame) {
 //    if (!frame.empty())
@@ -12,7 +13,7 @@ void MainWindow::Display(cv::Mat frame) {
     double x;
     double y;
 
-    cv::cvtColor(frame, tmp, CV_RGB2BGR);
+    cv::cvtColor(frame, tmp, cv::COLOR_RGB2BGR);
     Img = QImage((const uchar *) (tmp.data), tmp.cols, tmp.rows, tmp.cols * frame.channels(), QImage::Format_RGB888);
 
     if (m_X != -1 || m_Y != -1) {
@@ -109,13 +110,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 #endif
 #if USE_DSHOW
         if (SUCCEEDED(m_lib.ConnectDevice(m_selectedDeivce.toLatin1().data()))) {
-            if (SUCCEEDED(m_lib.GetExposure())) {
+            if (SUCCEEDED(m_lib.GetExposure()) && SUCCEEDED(m_lib.GetPowerLineFrequency())) {
                 ui->exposure_box->setEnabled(true);
-                std::map<std::string, int> ExTmp = m_lib.GetVal();
+                std::map<std::string, int> ExTmp = m_lib.get_exposure_vals();
                 ui->exposure_value->setMaximum(ExTmp["max"]);
                 ui->exposure_value->setMinimum(ExTmp["min"]);
                 ui->exposure_value->setValue(ExTmp["cur"]);
                 ui->exposure_label->setText(QString::number(ExTmp["cur"]));
+                u_long powerline_freq_type = m_lib.get_power_line_freq();
+                ui->power_line_frequency->setEnabled(true);
+                powerline_freq_type == 1 ? ui->f50_btn->setChecked(true) : ui->f60_btn->setChecked(true);
             }
         }
 #endif
@@ -163,6 +167,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                 emit SetRotateStatue(true);
         else
                 emit SetRotateStatue(false);
+    });
+    connect(ui->f50_btn, &QRadioButton::toggled, this, [=](bool arg){
+        if (arg){
+            if (SUCCEEDED(m_lib.SetPowerLineFrequency(1)))
+                LOG::logger(LOG::LogLevel::INFO, "Powerline freq set to 50 Hz!");
+            else
+                LOG::logger(LOG::LogLevel::WARN, "Powerline freq failed to set!");
+        }
+    });
+    connect(ui->f60_btn, &QRadioButton::toggled, this, [=](bool arg){
+        if (arg){
+            if (SUCCEEDED(m_lib.SetPowerLineFrequency(2)))
+                LOG::logger(LOG::LogLevel::INFO, "Powerline freq set to 60 Hz!");
+            else
+                LOG::logger(LOG::LogLevel::WARN, "Powerline freq failed to set!");
+        }
+
     });
 
 }

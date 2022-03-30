@@ -4,8 +4,6 @@
 #include <cstdint>
 #include <QString>
 
-#define SX_CMD_SEARCH_ACK 0x2000
-
 namespace Dev {
     typedef struct UVCDevice {
         QString p1;

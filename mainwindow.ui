@@ -424,7 +424,10 @@ color:lightgray;
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_8">
+           <widget class="QGroupBox" name="power_line_frequency">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="font">
              <font>
               <family>Microsoft YaHei UI</family>
@@ -432,44 +435,26 @@ color:lightgray;
              </font>
             </property>
             <property name="title">
-             <string>NaN</string>
+             <string>电力频闪</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_13">
-             <item row="1" column="1">
-              <spacer name="horizontalSpacer_8">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Ignored</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="2">
-              <widget class="QSlider" name="horizontalSlider_3">
-               <property name="minimum">
-                <number>-10</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="label_16">
-               <property name="text">
-                <string>NaN</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QRadioButton" name="f50_btn">
+                 <property name="text">
+                  <string>50Hz</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="f60_btn">
+                 <property name="text">
+                  <string>60Hz</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
